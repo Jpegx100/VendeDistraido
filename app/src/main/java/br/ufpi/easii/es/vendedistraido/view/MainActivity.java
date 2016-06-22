@@ -1,7 +1,9 @@
-package br.ufpi.easii.es.vendedistraido;
+package br.ufpi.easii.es.vendedistraido.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import br.ufpi.easii.es.vendedistraido.R;
 
 public class MainActivity extends AppCompatActivity {
 
