@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         btn_cadastrar.setOnClickListener(onClickCadastrar());
 
         btn_entrar.setOnClickListener(onClickEntrar());
-
     }
 
     private View.OnClickListener onClickEntrar(){

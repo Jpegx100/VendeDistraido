@@ -1,5 +1,6 @@
 package br.ufpi.easii.es.vendedistraido.view;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,16 +8,22 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.ufpi.easii.es.vendedistraido.R;
+import br.ufpi.easii.es.vendedistraido.control.ClienteControle;
+import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
+import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
+import br.ufpi.easii.es.vendedistraido.model.Cliente;
 
 public class CadastroActivity extends AppCompatActivity {
 
     private EditText edt_email, edt_senha,edt_nome, edt_telefone, edt_confirmaSenha;
     private Button btn_cadastrar;
+    private Context context ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        context = this;
 
         edt_nome = (EditText) findViewById(R.id.cadastro_edt_nome);
         edt_email = (EditText) findViewById(R.id.cadastro_edt_email);
@@ -33,8 +40,24 @@ public class CadastroActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                String nome, email, telefone, senha, csenha;
+                nome = edt_nome.getText().toString();
+                email = edt_email.getText().toString();
+                telefone = edt_telefone.getText().toString();
+                senha = edt_senha.getText().toString();
+                csenha = edt_confirmaSenha.getText().toString();
+                Cliente cliente = new Cliente(nome, email, senha, telefone, null);
 
-            }
+                try {
+                    ClienteControle.inserir(cliente,context);
+                } catch (ExcecaoDeErroDeConexao excecaoDeErroDeConexao) {
+                    excecaoDeErroDeConexao.printStackTrace();
+                } catch (ExcecaoDeUsuarioJaExistente excecaoDeUsuarioJaExistente) {
+                    excecaoDeUsuarioJaExistente.printStackTrace();
+                }
+
+
+            }//fim botao
         };
     }
 

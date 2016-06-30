@@ -11,19 +11,19 @@ import br.ufpi.easii.es.vendedistraido.model.Usuario;
 public class UsuarioControle {
 
     public void login(Usuario usuario){
-        //faz a requisiçao no servidor
+        //faz a requisiï¿½ao no servidor
 
         if(usuario instanceof Cliente){
             //direcina para alguma tela de cliente
-            //cria a seção do usuário
+            //cria a seï¿½ï¿½o do usuï¿½rio
         }
         if(usuario instanceof Corretor){
             //direcina para alguma tela de corretor
-            //cria a seção do usuário
+            //cria a seï¿½ï¿½o do usuï¿½rio
         }
         if(usuario instanceof Gestor){
             //direcina para alguma tela de gestor
-            //cria a seção do usuário
+            //cria a seï¿½ï¿½o do usuï¿½rio
         }
     }
 }

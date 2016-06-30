@@ -1,9 +1,22 @@
 package br.ufpi.easii.es.vendedistraido.control;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.loopj.android.http.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
@@ -15,36 +28,42 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ClienteControle {
 
-    private static final String SEND_URL = "";
+    private static final String SEND_URL = "http://10.28.15.49/VendeDistraido/main/AdicionaCliente.php";
 
-    public void inserir(final Cliente cliente) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
+    public static void inserir(final Cliente cliente,Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
+
         final Gson gson = new Gson();
-        String jsonCliente = gson.toJson(cliente);
+        final String jsonCliente = gson.toJson(cliente);
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
 
-        params.put("objetoCliente", jsonCliente);
-
-        final Cliente[] clienteResposta = new Cliente[1];
-
-        client.post(SEND_URL, params, new TextHttpResponseHandler() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL,
+                new Response.Listener<String>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String res) {
-                        // called when response HTTP status is "200 OK"
-                         clienteResposta[0] = gson.fromJson(res, Cliente.class);
+                    public void onResponse(String response) {
 
-                        Log.i("LOG", "OK" + res);
+                        Log.i("LOG", "response: " + response);
+
                     }
-
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-
-                        Log.i("LOG","D:"+res);
+                    public void onErrorResponse(VolleyError error) {
+                       // Toast.makeText(ClienteControle.this, "Verifique sua conexão!", Toast.LENGTH_LONG).show();
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
                     }
-                }
-        );
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("objetoCliente", jsonCliente);
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
 
 
         //insere no servidor
