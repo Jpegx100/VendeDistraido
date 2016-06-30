@@ -36,6 +36,7 @@
             android:hint="@string/confirmar_senha"/>
         <Button
             style="@style/DefaltButton"
+            android:id="@+id/cadastra_corretor_btn_cadastrar"
             android:text="@string/cadastrar"/>
     </LinearLayout>
 </RelativeLayout>
