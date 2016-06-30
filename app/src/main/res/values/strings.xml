@@ -21,4 +21,6 @@
     <string name="titulo">Título</string>
     <string name="endereco">Endereço</string>
     <string name="title_activity_gestor">GestorActivity</string>
+    <string name="corretores">Corretores</string>
+    <string name="cancela">Cancelar</string>
 </resources>
