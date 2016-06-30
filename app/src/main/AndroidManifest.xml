@@ -15,6 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.CadastroActivity"></activity>
+
         <activity
             android:name=".view.GestorActivity"
             android:label="@string/title_activity_gestor"
@@ -22,6 +25,7 @@
         <activity android:name=".view.CorretorActivity" />
         <activity android:name=".view.CadastraCorretorActivity" />
         <activity android:name=".view.CadastraImovelActivity"></activity>
+
     </application>
 
 </manifest>

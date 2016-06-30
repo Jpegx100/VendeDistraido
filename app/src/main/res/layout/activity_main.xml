@@ -9,8 +9,35 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="25dp"
+        android:gravity="center">
+
+
+        <EditText
+            style="@style/DefaltEditText"
+            android:id="@+id/main_edt_email"
+            android:hint="@string/email"
+             />
+
+        <EditText
+            style="@style/DefaltEditText"
+            android:id="@+id/main_edt_senha"
+            android:hint="@string/senha"
+            />
+
+        <Button
+            style="@style/DefaltButton"
+            android:text="@string/entrar"
+            android:id="@+id/main_btn_entrar"
+           />
+        <Button
+            style="@style/DefaltButton"
+            android:text="@string/cadastre_se"
+            android:id="@+id/main_btn_cadastrar"
+            />
+    </LinearLayout>
 </RelativeLayout>
