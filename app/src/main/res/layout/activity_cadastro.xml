@@ -9,81 +9,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.ufpi.easii.es.vendedistraido.view.CadastroActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="25dp"
+        android:gravity="center">
+
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:text="@string/nome"
-        android:ems="10"
         android:id="@+id/cadastro_edt_nome"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+        style="@style/DefaltEditText"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
         android:id="@+id/cadastro_edt_email"
-        android:layout_below="@+id/cadastro_edt_nome"
         android:hint="@string/email"
-        android:layout_centerHorizontal="true" />
+        style="@style/DefaltEditText"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
         android:id="@+id/cadastro_edt_telefone"
-        android:layout_below="@+id/cadastro_edt_email"
         android:hint="@string/telefone"
-        android:layout_centerHorizontal="true" />
+        style="@style/DefaltEditText"
+        />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
         android:id="@+id/cadastro_edt_senha"
-        android:layout_below="@+id/cadastro_edt_telefone"
-        android:layout_centerHorizontal="true"
         android:hint="@string/senha"
+        style="@style/DefaltEditText"
         />
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
         android:id="@+id/cadastro_edt_confirmeSenha"
-        android:layout_below="@+id/cadastro_edt_telefone"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/confirmeSenha"
+        android:hint="@string/confirmar_senha"
+        style="@style/DefaltEditText"
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/cadastrar"
         android:id="@+id/cadastro_btn_cadastrar"
-        android:layout_marginTop="49dp"
-        android:layout_below="@+id/cadastro_edt_senha"
-        android:layout_alignLeft="@+id/cadastro_edt_senha"
-        android:layout_alignStart="@+id/cadastro_edt_senha"
-        android:background="@color/botao"
+        style="@style/DefaltButton"
         />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancelar"
-        android:id="@+id/cadastro_btn_cancelar"
-        android:layout_alignTop="@+id/cadastro_btn_cadastrar"
-        android:layout_alignRight="@+id/cadastro_edt_senha"
-        android:layout_alignEnd="@+id/cadastro_edt_senha"
-        android:background="@color/botao"
-        />
-
+    </LinearLayout>
 
 </RelativeLayout>

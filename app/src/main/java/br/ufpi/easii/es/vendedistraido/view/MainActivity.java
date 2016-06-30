@@ -1,5 +1,7 @@
 package br.ufpi.easii.es.vendedistraido.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,23 +12,23 @@ import br.ufpi.easii.es.vendedistraido.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText email, senha;
-    private Button btnEntrar, btnCadastrar;
+    private EditText edt_email, edt_senha;
+    private Button btn_entrar, btn_cadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        email = (EditText) findViewById(R.id.main_edt_email);
-        senha = (EditText) findViewById(R.id.main_edt_senha);
+        edt_email = (EditText) findViewById(R.id.main_edt_email);
+        edt_senha = (EditText) findViewById(R.id.main_edt_senha);
 
-        btnCadastrar = (Button) findViewById(R.id.main_btn_cadastrar);
-        btnEntrar = (Button) findViewById(R.id.main_btn_entrar);
+        btn_cadastrar = (Button) findViewById(R.id.main_btn_cadastrar);
+        btn_entrar = (Button) findViewById(R.id.main_btn_entrar);
 
-        btnCadastrar.setOnClickListener(onClickCadastrar());
+        btn_cadastrar.setOnClickListener(onClickCadastrar());
 
-        btnEntrar.setOnClickListener(onClickEntrar());
+        btn_entrar.setOnClickListener(onClickEntrar());
 
     }
 
@@ -43,41 +45,45 @@ public class MainActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), CadastroActivity.class);
+                startActivity(intent);
             }
         };
     }
 
-
-    public EditText getEmail() {
-        return email;
+    private Context getContext(){
+        return this;
     }
 
-    public void setEmail(EditText email) {
-        this.email = email;
+    public EditText getEdt_email() {
+        return edt_email;
     }
 
-    public EditText getSenha() {
-        return senha;
+    public void setEdt_email(EditText edt_email) {
+        this.edt_email = edt_email;
     }
 
-    public void setSenha(EditText senha) {
-        this.senha = senha;
+    public EditText getEdt_senha() {
+        return edt_senha;
     }
 
-    public Button getBtnEntrar() {
-        return btnEntrar;
+    public void setEdt_senha(EditText edt_senha) {
+        this.edt_senha = edt_senha;
     }
 
-    public void setBtnEntrar(Button btnEntrar) {
-        this.btnEntrar = btnEntrar;
+    public Button getBtn_entrar() {
+        return btn_entrar;
     }
 
-    public Button getBtnCadastrar() {
-        return btnCadastrar;
+    public void setBtn_entrar(Button btn_entrar) {
+        this.btn_entrar = btn_entrar;
     }
 
-    public void setBtnCadastrar(Button btnCadastrar) {
-        this.btnCadastrar = btnCadastrar;
+    public Button getBtn_cadastrar() {
+        return btn_cadastrar;
+    }
+
+    public void setBtn_cadastrar(Button btn_cadastrar) {
+        this.btn_cadastrar = btn_cadastrar;
     }
 }
