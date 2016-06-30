@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">VendeDistraido</string>
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="confirmar_senha">Confirme a senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="cadastrar_corretor">Cadastrar Corretor</string>
+    <string name="cadastrar_imovel">Cadastrar Imóvel</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="listar_corretor">Listar Corretores</string>
+    <string name="excluir_corretor">Excluir Corretor</string>
+    <string name="imoveis">Imóveis</string>
+    <string name="relatorios">Relatórios</string>
+    <string name="mapa">Mapa</string>
+    <string name="lista">Lista</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="titulo">Título</string>
+    <string name="endereco">Endereço</string>
+    <string name="title_activity_gestor">GestorActivity</string>
 </resources>
