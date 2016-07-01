@@ -18,7 +18,7 @@ import cz.msebera.android.httpclient.Header;
 public class CorretorControle {
     private static final String SEND_URL = "";
 
-    public void inserir(Corretor corretor) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
+    public static void inserir(Corretor corretor) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();
         String jsonCorretor = gson.toJson(corretor);
 
