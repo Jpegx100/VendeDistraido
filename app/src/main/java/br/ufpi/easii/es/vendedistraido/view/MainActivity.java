@@ -4,11 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import br.ufpi.easii.es.vendedistraido.R;
+import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
+import br.ufpi.easii.es.vendedistraido.model.Cliente;
+import br.ufpi.easii.es.vendedistraido.model.Corretor;
+import br.ufpi.easii.es.vendedistraido.model.Gestor;
+import br.ufpi.easii.es.vendedistraido.model.Usuario;
+import br.ufpi.easii.es.vendedistraido.view.cliente.ClienteActivity;
+import br.ufpi.easii.es.vendedistraido.view.corretor.CorretorActivity;
+import br.ufpi.easii.es.vendedistraido.view.gestor.GestorActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,15 +28,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         edt_email = (EditText) findViewById(R.id.main_edt_email);
         edt_senha = (EditText) findViewById(R.id.main_edt_senha);
-
         btn_cadastrar = (Button) findViewById(R.id.main_btn_cadastrar);
         btn_entrar = (Button) findViewById(R.id.main_btn_entrar);
-
         btn_cadastrar.setOnClickListener(onClickCadastrar());
-
         btn_entrar.setOnClickListener(onClickEntrar());
     }
 
@@ -35,7 +40,25 @@ public class MainActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
+                String senha = edt_senha.getText().toString();
+                String email = edt_email.getText().toString();
+                Usuario usuario = UsuarioControle.pesquisar(email, senha);
+                if(usuario instanceof Cliente){
+                    Log.i("LOGIN", "Cliente Logado");
+                    Intent intent = new Intent(getContext(), ClienteActivity.class);
+                    intent.putExtra(ClienteActivity.ID_CLIENTE, usuario.getId());
+                    startActivity(intent);
+                }else if(usuario instanceof Gestor){
+                    Log.i("LOGIN", "Gestor Logado");
+                    Intent intent = new Intent(getContext(), GestorActivity.class);
+                    intent.putExtra(GestorActivity.ID_GESTOR, usuario.getId());
+                    startActivity(intent);
+                }else if(usuario instanceof Corretor){
+                    Log.i("LOGIN", "Gestor Logado");
+                    Intent intent = new Intent(getContext(), CorretorActivity.class);
+                    intent.putExtra(CorretorActivity.ID_CORRETOR, usuario.getId());
+                    startActivity(intent);
+                }
             }
         };
     }
@@ -44,45 +67,12 @@ public class MainActivity extends AppCompatActivity {
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CadastroActivity.class);
+                Intent intent = new Intent(getContext(), CadastroClienteActivity.class);
                 startActivity(intent);
             }
         };
     }
-
     private Context getContext(){
         return this;
-    }
-
-    public EditText getEdt_email() {
-        return edt_email;
-    }
-
-    public void setEdt_email(EditText edt_email) {
-        this.edt_email = edt_email;
-    }
-
-    public EditText getEdt_senha() {
-        return edt_senha;
-    }
-
-    public void setEdt_senha(EditText edt_senha) {
-        this.edt_senha = edt_senha;
-    }
-
-    public Button getBtn_entrar() {
-        return btn_entrar;
-    }
-
-    public void setBtn_entrar(Button btn_entrar) {
-        this.btn_entrar = btn_entrar;
-    }
-
-    public Button getBtn_cadastrar() {
-        return btn_cadastrar;
-    }
-
-    public void setBtn_cadastrar(Button btn_cadastrar) {
-        this.btn_cadastrar = btn_cadastrar;
     }
 }

@@ -1,16 +1,21 @@
-package br.ufpi.easii.es.vendedistraido.view;
+package br.ufpi.easii.es.vendedistraido.view.gestor;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import br.ufpi.easii.es.vendedistraido.R;
+import br.ufpi.easii.es.vendedistraido.control.GestorControle;
+import br.ufpi.easii.es.vendedistraido.model.Gestor;
 
 public class GestorActivity extends AppCompatActivity {
+    public static final String ID_GESTOR = "id_gestor";
     private Button btn_corretores, btn_imoveis, btn_relatorios;
+    private Gestor gestor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,13 +26,25 @@ public class GestorActivity extends AppCompatActivity {
         btn_imoveis.setOnClickListener(onClickImoveis());
         btn_relatorios = (Button)findViewById(R.id.gestor_btn_relatorios);
         btn_relatorios.setOnClickListener(onClickRelatorios());
+        Intent intent = getIntent();
+        if(intent.hasExtra(ID_GESTOR)) {
+            long id = intent.getLongExtra(ID_GESTOR, -1);
+            if (id != -1) {
+                Log.i("LOGIN", "Gestor id="+id+" logado.");
+                gestor = GestorControle.pesquisar(id);
+            }
+        }else{
+            //Retornar ao login!
+        }
     }
 
     private View.OnClickListener onClickCorretores() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), ListarCorretoresActivity.class);
+                intent.putExtra(ID_GESTOR, gestor.getId());
+                startActivity(intent);
             }
         };
     }
@@ -36,7 +53,9 @@ public class GestorActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), ListarImoveisActivity.class);
+                intent.putExtra(ID_GESTOR, gestor.getId());
+                startActivity(intent);
             }
         };
     }
@@ -45,8 +64,12 @@ public class GestorActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //RELATORIOS
             }
         };
+    }
+
+    private Context getContext(){
+        return this;
     }
 }

@@ -1,4 +1,4 @@
-package br.ufpi.easii.es.vendedistraido.view;
+package br.ufpi.easii.es.vendedistraido.view.gestor;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;

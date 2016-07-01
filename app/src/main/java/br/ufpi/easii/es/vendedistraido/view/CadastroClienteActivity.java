@@ -13,7 +13,7 @@ import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 
-public class CadastroActivity extends AppCompatActivity {
+public class CadastroClienteActivity extends AppCompatActivity {
 
     private EditText edt_email, edt_senha,edt_nome, edt_telefone, edt_confirmaSenha;
     private Button btn_cadastrar;

@@ -1,4 +1,4 @@
-package br.ufpi.easii.es.vendedistraido.view;
+package br.ufpi.easii.es.vendedistraido.view.corretor;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import br.ufpi.easii.es.vendedistraido.R;
 public class CorretorActivity extends AppCompatActivity {
     private Button btn_cadastrar;
     private ListView lista_imoveis;
+    public static String ID_CORRETOR = "id_corretor";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

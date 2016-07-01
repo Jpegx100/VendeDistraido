@@ -1,4 +1,4 @@
-package br.ufpi.easii.es.vendedistraido.view;
+package br.ufpi.easii.es.vendedistraido.view.corretor;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

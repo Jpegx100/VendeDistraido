@@ -18,17 +18,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.CadastroActivity"></activity>
-
+        <activity android:name=".view.CadastroClienteActivity" />
         <activity
-            android:name=".view.GestorActivity"
+            android:name=".view.gestor.GestorActivity"
             android:label="@string/title_activity_gestor"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.CorretorActivity" />
-        <activity android:name=".view.CadastraCorretorActivity" />
-        <activity android:name=".view.CadastraImovelActivity"></activity>
-
+        <activity android:name=".view.corretor.CorretorActivity" />
+        <activity android:name=".view.gestor.CadastraCorretorActivity" />
+        <activity android:name=".view.corretor.CadastraImovelActivity" />
+        <activity android:name=".view.cliente.ClienteActivity" />
+        <activity android:name=".view.gestor.ListarCorretoresActivity" />
+        <activity android:name=".view.gestor.ListarImoveisActivity"></activity>
     </application>
 
 </manifest>
