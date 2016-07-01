@@ -38,7 +38,7 @@ public class UsuarioControle {
         corretores.add(new Corretor(29, "corretor","em","s","w",new ArrayList<Imovel>()));
         corretores.add(new Corretor(39, "corretor","em","s","w",new ArrayList<Imovel>()));
         corretores.add(new Corretor(49, "corretor","em","s","w",new ArrayList<Imovel>()));
-        Gestor gestor = new Gestor(1,"nome",email, senha,"999",new ArrayList<Corretor>());
+        Gestor gestor = new Gestor(1,"nome",email, senha,"999",corretores);
         return gestor;
     }
 }
