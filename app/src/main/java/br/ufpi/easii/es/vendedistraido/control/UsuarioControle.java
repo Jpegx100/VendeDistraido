@@ -41,4 +41,5 @@ public class UsuarioControle {
         Gestor gestor = new Gestor(1,"nome",email, senha,"999",corretores);
         return gestor;
     }
+
 }

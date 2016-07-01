@@ -7,9 +7,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
+import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -52,4 +56,19 @@ public class CorretorControle {
 
         //redireciona para tela apropriada
     }
+
+
+    public static List<Imovel> pesquisarImoveis(Corretor corretor){
+        List<Imovel> imoveis = new ArrayList<Imovel>();
+
+
+        imoveis.add(new Imovel(1, "1.0.2.3.4", "1.7.4.6.1", "Morada Nova", corretor));
+        imoveis.add(new Imovel(2, "1.2.2.3.4", "1.2.4.6.1", "Morada Nova", corretor));
+        imoveis.add(new Imovel(3, "1.4.2.3.4", "1.0.4.6.1", "Morada Nova", corretor));
+        imoveis.add(new Imovel(4, "1.1.2.3.4", "1.5.4.6.1", "Morada Nova", corretor));
+        imoveis.add(new Imovel(5, "1.4.2.3.4", "1.6.4.6.1", "Morada Nova", corretor));
+
+        return imoveis;
+    }
+
 }
