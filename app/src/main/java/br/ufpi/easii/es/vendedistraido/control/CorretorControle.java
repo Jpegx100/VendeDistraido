@@ -1,11 +1,23 @@
 package br.ufpi.easii.es.vendedistraido.control;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
@@ -16,40 +28,81 @@ import cz.msebera.android.httpclient.Header;
  * Created by Irvayne Matheus on 30/06/2016.
  */
 public class CorretorControle {
-    private static final String SEND_URL = "";
+    private static final String SEND_URL_INSERIR = "http://10.28.15.49/VendeDistraido/main/AdicionaCorretor.php";
+    private static final String SEND_URL_LISTAR = "http://10.28.15.49/VendeDistraido/main/ListarCorretor.php";
 
-    public void inserir(Corretor corretor) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
+    public void inserir(Corretor corretor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();
-        String jsonCorretor = gson.toJson(corretor);
+        final String jsonCorretor = gson.toJson(corretor);
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
 
-        params.put("objetoCorretor", jsonCorretor);
-
-        final Corretor[] corretorResposta = new Corretor[1];
-
-        client.post(SEND_URL, params, new TextHttpResponseHandler() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
+                new Response.Listener<String>() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, String res) {
-                        // called when response HTTP status is "200 OK"
-                        corretorResposta[0] = gson.fromJson(res, Corretor.class);
+                    public void onResponse(String response) {
 
-                        Log.i("LOG", "OK" + res);
+                        Log.i("LOG", "response: " + response);
+
                     }
-
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                        // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-
-                        Log.i("LOG","D:"+res);
+                    public void onErrorResponse(VolleyError error) {
+                        // Toast.makeText(ClienteControle.this, "Verifique sua conexão!", Toast.LENGTH_LONG).show();
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
                     }
-                }
-        );
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("objetoCorretor", jsonCorretor);
 
+                return params;
+            }
 
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
         //insere no servidor
 
         //redireciona para tela apropriada
+    }
+
+    public List<Corretor> listar(long idGestor, Context context){
+        final Gson gson = new Gson();
+        final String jsonIdGestor = gson.toJson(idGestor);
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_LISTAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.i("LOG", "response: " + response);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Toast.makeText(ClienteControle.this, "Verifique sua conexão!", Toast.LENGTH_LONG).show();
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("objetoCorretor", jsonIdGestor);
+
+                return params;
+            }
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
+        return new ArrayList<>();
     }
 }

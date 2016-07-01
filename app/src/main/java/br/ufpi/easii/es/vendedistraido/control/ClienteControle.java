@@ -30,7 +30,7 @@ public class ClienteControle {
 
     private static final String SEND_URL = "http://10.28.15.49/VendeDistraido/main/AdicionaCliente.php";
 
-    public static void inserir(final Cliente cliente,Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
+    public static void inserir(Cliente cliente, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
 
         final Gson gson = new Gson();
         final String jsonCliente = gson.toJson(cliente);
