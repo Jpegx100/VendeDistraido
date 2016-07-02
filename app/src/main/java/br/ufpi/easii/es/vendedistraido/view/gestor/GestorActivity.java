@@ -10,7 +10,10 @@ import android.widget.Button;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.GestorControle;
+import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
+import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
+import br.ufpi.easii.es.vendedistraido.model.Usuario;
 
 public class GestorActivity extends AppCompatActivity {
     public static final String ID_GESTOR = "id_gestor";
@@ -31,7 +34,12 @@ public class GestorActivity extends AppCompatActivity {
             long id = intent.getLongExtra(ID_GESTOR, -1);
             if (id != -1) {
                 Log.i("LOGIN", "Gestor id="+id+" logado.");
-                gestor = GestorControle.pesquisar(id);
+                /*try {
+                    gestor = (Gestor) UsuarioControle.pesquisar(new Usuario(id, "", "", "", ""), getContext());
+                } catch (ExcecaoDeUsuarioInexistente excecaoDeUsuarioInexistente) {
+                    Log.e("ERROR", "USUARIO NAO ENCONTRAR!");
+                    excecaoDeUsuarioInexistente.printStackTrace();
+                }*/
             }
         }else{
             //Retornar ao login!

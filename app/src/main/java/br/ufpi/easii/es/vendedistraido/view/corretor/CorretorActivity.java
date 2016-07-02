@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.CorretorControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
+import br.ufpi.easii.es.vendedistraido.model.Imovel;
 
 public class CorretorActivity extends AppCompatActivity {
     private Button btn_cadastrar;
@@ -26,7 +27,7 @@ public class CorretorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corretor);
 
-        btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
+        /*btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
 
         Intent intent = getIntent();
@@ -36,14 +37,14 @@ public class CorretorActivity extends AppCompatActivity {
             ArrayList<String> list = new ArrayList<String>();
 
             for(Imovel imovel:corretor.getImoveis()){
-                list.add(imovel.getNome());
+                list.add(imovel.getEndereco());
             }
 
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
             lista_imoveis.setAdapter(adapter);
         }else{
             onDestroy();
-        }
+        }*/
     }
     private View.OnClickListener onClickCadastrar(){
         return new View.OnClickListener() {

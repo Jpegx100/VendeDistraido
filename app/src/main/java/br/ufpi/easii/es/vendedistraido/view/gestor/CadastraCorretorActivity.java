@@ -55,7 +55,7 @@ public class CadastraCorretorActivity extends AppCompatActivity {
                 String telefone = edt_telefone.getText().toString();
                 Corretor corretor = new Corretor(-1, nome, email, senha, telefone, null);
                 try {
-                    CorretorControle.inserir(corretor);
+                    CorretorControle.inserir(corretor, getContext());
                 } catch (ExcecaoDeErroDeConexao excecaoDeErroDeConexao) {
                     excecaoDeErroDeConexao.printStackTrace();
                 } catch (ExcecaoDeUsuarioJaExistente excecaoDeUsuarioJaExistente) {
@@ -63,5 +63,8 @@ public class CadastraCorretorActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+    private Context getContext(){
+        return this;
     }
 }

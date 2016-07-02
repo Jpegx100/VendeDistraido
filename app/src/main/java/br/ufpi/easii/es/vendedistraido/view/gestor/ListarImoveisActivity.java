@@ -46,7 +46,7 @@ public class ListarImoveisActivity extends AppCompatActivity {
                 List<Imovel> listaImovel = new ArrayList<Imovel>();
 
                 for (Corretor corretor: gestor.getCorretores()){
-                    listaImovel.addAll(CorretorControle.pesquisarImoveis(corretor));
+                    //listaImovel.addAll(ImovelControle.pesquisar(corretor));
                 }
 
                 for (Imovel imovel: listaImovel){

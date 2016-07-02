@@ -8,6 +8,7 @@ import br.ufpi.easii.es.vendedistraido.model.Gestor;
  */
 public class GestorControle {
     public static Gestor pesquisar(long id) {
-        return (Gestor) UsuarioControle.pesquisar("email", "senha");
+        //return (Gestor) UsuarioControle.pesquisar("email", "senha");
+        return null;
     }
 }

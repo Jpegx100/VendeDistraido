@@ -33,7 +33,7 @@ public class CorretorControle {
     private static final String SEND_URL_LISTAR = "http://10.28.15.49/VendeDistraido/main/ListarCorretor.php";
 
 
-    public void inserir(Corretor corretor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
+    public static void inserir(Corretor corretor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
 
         final Gson gson = new Gson();
         final String jsonCorretor = gson.toJson(corretor);
@@ -51,7 +51,7 @@ public class CorretorControle {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Toast.makeText(ClienteControle.this, "Verifique sua conexão!", Toast.LENGTH_LONG).show();
+                        // Toast.makeText(ClienteControle.this, "Verifique sua conexo!", Toast.LENGTH_LONG).show();
                         Log.i("LOG", "erro: " + error.getMessage().toString());
                     }
                 }) {
@@ -89,7 +89,7 @@ public class CorretorControle {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Toast.makeText(ClienteControle.this, "Verifique sua conexão!", Toast.LENGTH_LONG).show();
+                        // Toast.makeText(ClienteControle.this, "Verifique sua conexo!", Toast.LENGTH_LONG).show();
                         Log.i("LOG", "erro: " + error.getMessage().toString());
                     }
                 }) {

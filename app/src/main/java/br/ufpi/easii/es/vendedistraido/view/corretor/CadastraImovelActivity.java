@@ -27,7 +27,7 @@ public class CadastraImovelActivity extends AppCompatActivity {
         btn_cadastrar = (Button)findViewById(R.id.cadastra_imovel_btn_cadastrar);
         Intent intent = getIntent();
         if(intent.hasExtra(CorretorActivity.ID_CORRETOR)){
-            corretor = CorretorControle.pesquisa(intent.getLongExtra(CorretorActivity.ID_CORRETOR, -1));
+            //corretor = CorretorControle.pesquisa(intent.getLongExtra(CorretorActivity.ID_CORRETOR, -1));
         }
         btn_cadastrar.setOnClickListener(onClickCadastrar());
     }
@@ -40,7 +40,7 @@ public class CadastraImovelActivity extends AppCompatActivity {
                 String lon = edt_longitude.getText().toString();
                 String end = edt_endereco.getText().toString();
                 Imovel imovel = new Imovel(-1, lat, lon, end, corretor);
-                ImovelControle.inserir(imovel);
+                //ImovelControle.inserir(imovel);
             }
         };
     }

@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
+import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
@@ -42,22 +43,28 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String senha = edt_senha.getText().toString();
                 String email = edt_email.getText().toString();
-                Usuario usuario = UsuarioControle.pesquisar(email, senha);
-                if(usuario instanceof Cliente){
-                    Log.i("LOGIN", "Cliente Logado");
-                    Intent intent = new Intent(getContext(), ClienteActivity.class);
-                    intent.putExtra(ClienteActivity.ID_CLIENTE, usuario.getId());
-                    startActivity(intent);
-                }else if(usuario instanceof Gestor){
-                    Log.i("LOGIN", "Gestor Logado");
-                    Intent intent = new Intent(getContext(), GestorActivity.class);
-                    intent.putExtra(GestorActivity.ID_GESTOR, usuario.getId());
-                    startActivity(intent);
-                }else if(usuario instanceof Corretor){
-                    Log.i("LOGIN", "Gestor Logado");
-                    Intent intent = new Intent(getContext(), CorretorActivity.class);
-                    intent.putExtra(CorretorActivity.ID_CORRETOR, usuario.getId());
-                    startActivity(intent);
+                Usuario usuario = null;
+                try {
+                    usuario = UsuarioControle.pesquisar(new Usuario(-1, "", email, "", ""), getContext());
+                    Log.i("USUARIO", usuario.toString());
+                    if(usuario instanceof Cliente){
+                        Log.i("LOGIN", "Cliente Logado");
+                        Intent intent = new Intent(getContext(), ClienteActivity.class);
+                        intent.putExtra(ClienteActivity.ID_CLIENTE, usuario.getId());
+                        startActivity(intent);
+                    }else if(usuario instanceof Gestor){
+                        Log.i("LOGIN", "Gestor Logado");
+                        Intent intent = new Intent(getContext(), GestorActivity.class);
+                        intent.putExtra(GestorActivity.ID_GESTOR, usuario.getId());
+                        startActivity(intent);
+                    }else if(usuario instanceof Corretor){
+                        Log.i("LOGIN", "Gestor Logado");
+                        Intent intent = new Intent(getContext(), CorretorActivity.class);
+                        intent.putExtra(CorretorActivity.ID_CORRETOR, usuario.getId());
+                        startActivity(intent);
+                    }
+                } catch (ExcecaoDeUsuarioInexistente excecaoDeUsuarioInexistente) {
+                    excecaoDeUsuarioInexistente.printStackTrace();
                 }
             }
         };
