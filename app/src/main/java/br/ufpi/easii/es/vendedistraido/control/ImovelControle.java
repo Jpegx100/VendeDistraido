@@ -12,16 +12,14 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.zip.CheckedOutputStream;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeImovelInexistente;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoImovelJaExistente;
-import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
-import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
-import br.ufpi.easii.es.vendedistraido.model.Usuario;
+
 
 /**
  * Created by Alexandre on 01/07/2016.
@@ -30,12 +28,14 @@ public class ImovelControle {
     private static final String SEND_URL_INSERIR = "http://10.28.15.49/VendeDistraido/main/AdicionaImovel.php";
     private static final String SEND_URL_REMOVER = "http://10.28.15.49/VendeDistraido/main/RemoveImovel.php";
     private static final String SEND_URL_EDITAR = "http://10.28.15.49/VendeDistraido/main/EditaImovel.php";
-    private static final String SEND_URL_LISTAR = "http://10.28.15.49/VendeDistraido/main/ListaImovel.php";
+    private static final String SEND_URL_PESQUISAR_POR_CORRETOR = "http://10.28.15.49/VendeDistraido/main/ListaImovelPorCorretor.php";
+    private static final String SEND_URL_PESQUISAR_TODOS = "http://10.28.15.49/VendeDistraido/main/ListaImovel.php";
+    private static final String SEND_URL_PESQUISAR = "http://10.28.15.49/VendeDistraido/main/PesquisaImovel.php";
 
-    public static void inserir(final Imovel imovel, long idDoCorretor,Context context) throws ExcecaoImovelJaExistente{
+    public static void inserir(final Imovel imovel, Corretor corretor,Context context) throws ExcecaoImovelJaExistente{
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
-        final String id = Long.toString(idDoCorretor);
+        final String jsonCorretor = gson.toJson(corretor);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
                 new Response.Listener<String>() {
@@ -54,7 +54,7 @@ public class ImovelControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoImovel", jsonImovel);
-                params.put("idCorretor", id);
+                params.put("objetoCorretor", jsonCorretor);
 
                 return params;
             }
@@ -66,7 +66,8 @@ public class ImovelControle {
     }
 
     public static void remover(final Imovel imovel, Context context) {
-        final String id = Long.toString(imovel.getId());
+        final Gson gson = new Gson();
+        final String jsonImovel = gson.toJson(imovel);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_REMOVER,
                 new Response.Listener<String>() {
@@ -84,7 +85,7 @@ public class ImovelControle {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idImovel", id);
+                params.put("objetoImovel", jsonImovel);
 
                 return params;
             }
@@ -95,6 +96,7 @@ public class ImovelControle {
         requestQueue.add(stringRequest);
     }
 
+    //Edita o imovel passado como parâmetro
     public static void editar(final Imovel imovel, Context context){
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
@@ -116,21 +118,20 @@ public class ImovelControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoImovel", jsonImovel);
-
                 return params;
             }
-
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
 
+    //Pesquisa e retorna o objeto passado como parâmetro
     public static Imovel pesquisar(final Imovel imovel, Context context) throws ExcecaoDeImovelInexistente{
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_LISTAR,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -167,11 +168,12 @@ public class ImovelControle {
         return imovel;
     }
 
-    //-1 carrega todos e o id carrega apenas os imoveis do corretor
-    public static void listar(long idDoCorretor, Context context){
-        final String id = Long.toString(idDoCorretor);
+    //Carrega todos os objetos referentes ao gestor passado como argumento
+    public static void pesquisar(Corretor corretor, Context context){
+        final Gson gson = new Gson();
+        final String jsonCorretor = gson.toJson(corretor);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_LISTAR,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR_POR_CORRETOR,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -189,7 +191,7 @@ public class ImovelControle {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("idCorretor", id);
+                params.put("objetoCorretor", jsonCorretor);
 
                 return params;
             }
