@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -47,6 +48,9 @@ public class CadastraCorretorActivity extends AppCompatActivity {
                 Corretor corretor = new Corretor(-1, nome, email, senha, telefone, null);
                 try {
                     CorretorControle.inserir(corretor, gestor, getContext());
+                    Toast t = Toast.makeText(getContext(), "Inserindo", Toast.LENGTH_LONG);
+                    t.show();
+                    finish();
                 } catch (ExcecaoDeErroDeConexao excecaoDeErroDeConexao) {
                     excecaoDeErroDeConexao.printStackTrace();
                 } catch (ExcecaoDeUsuarioJaExistente excecaoDeUsuarioJaExistente) {
