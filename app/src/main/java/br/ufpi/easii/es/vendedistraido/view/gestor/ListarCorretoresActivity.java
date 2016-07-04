@@ -16,7 +16,10 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
-
+/**
+ * Created by Jpegx.
+ * Classe responsavel por exibir a tela de listagem de corretores de um determinado gestor.
+ */
 public class ListarCorretoresActivity extends AppCompatActivity {
     private ListView list_corretores;
     private Button btn_cadastrar;
@@ -26,10 +29,11 @@ public class ListarCorretoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_corretor);
-        list_corretores = (ListView)findViewById(R.id.listar_corretor_list_corretores);
         btn_cadastrar = (Button)findViewById(R.id.listar_corretor_btn_cadastrar);
         btn_cadastrar.setOnClickListener(OnClickCadastrar());
         this.gestor = usuarioLogado();
+
+        list_corretores = (ListView)findViewById(R.id.listar_corretor_list_corretores);
         ArrayList<String> list = new ArrayList<String>();
         for(Corretor corretor:gestor.getCorretores()){
             list.add(corretor.getNome());
@@ -37,6 +41,10 @@ public class ListarCorretoresActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         list_corretores.setAdapter(adapter);
     }
+    /**
+     * Metodo que transforma os dados do arquivo de preferencias no objeto Gestor logado na sessao.
+     * @return retorna o gestor logado ou null casso nao haja alguem logado
+     */
     private Gestor usuarioLogado(){
         SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
         if(sharedPreferences == null) return null;

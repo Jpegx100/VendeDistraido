@@ -16,7 +16,10 @@ import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.cliente.ClienteActivity;
-
+/**
+ * Created by Jpegx.
+ * Classe responsavel por exibir a tela de cadastro de Cliente.
+ */
 public class CadastroClienteActivity extends AppCompatActivity {
 
     private EditText edt_email, edt_senha,edt_nome, edt_telefone, edt_confirmaSenha;

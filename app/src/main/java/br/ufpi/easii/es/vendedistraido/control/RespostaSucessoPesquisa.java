@@ -17,6 +17,7 @@ import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by jpegx on 7/2/2016.
+ * Classe responsavel por passar os parametros retornados pela requisicao do controle para a view para uma pesquisa de usuarios
  */
 public class RespostaSucessoPesquisa implements Response.Listener<String>{
     private Usuario usuario;

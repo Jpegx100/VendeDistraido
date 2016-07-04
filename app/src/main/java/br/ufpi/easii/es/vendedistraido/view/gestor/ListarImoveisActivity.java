@@ -18,7 +18,10 @@ import br.ufpi.easii.es.vendedistraido.control.GestorControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
-
+/**
+ * Created by Jpegx.
+ * Classe responsavel por exibir a tela de listagem de Imoveis dos corretores associados a um gestor.
+ */
 public class ListarImoveisActivity extends AppCompatActivity {
 
     private ListView list_imoveis;

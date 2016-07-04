@@ -21,7 +21,10 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.cliente.ClienteActivity;
 import br.ufpi.easii.es.vendedistraido.view.corretor.CorretorActivity;
 import br.ufpi.easii.es.vendedistraido.view.gestor.GestorActivity;
-
+/**
+ * Created by Jpegx.
+ * Classe responsavel por exibir a tela principal da aplicacao.
+ */
 public class MainActivity extends AppCompatActivity implements MainInterface{
 
     private EditText edt_email, edt_senha;
@@ -65,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
     private Context getContext(){
         return this;
     }
-
+    /**
+     * Metodo de view.MainInterface
+     * @param dados
+     */
     @Override
     public void dadosLidos(Object dados) {
         Log.i("USUARIO", dados.getClass().getName());
@@ -101,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
             //}
         }
     }
+    /**
+     * Metodo de view.MainInterface
+     * @param e
+     */
     @Override
     public void dadosNaoLidos(Exception e){
         Log.e("ERROR", "Usuario NAO ENCONTRADO");

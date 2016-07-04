@@ -26,11 +26,19 @@ import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.
+ * Classe responsavel pelo controle do fluxo dos usuarios do tipo cliente
  */
 public class ClienteControle {
 
     private static final String SEND_URL = Constantes.SERVER_URL+"AdicionaCliente.php";
 
+    /**
+     * Metodo responsavel pela insercao de um novo usuario do tipo cliente
+     * @param cliente objeto do tipo cliente vindo da visao e que sera inserido no banco de dados
+     * @param context contexto da view
+     * @throws ExcecaoDeErroDeConexao excecao que sera disparada caso exista erro na conexao
+     * @throws ExcecaoDeUsuarioJaExistente excecao que sera desparada caso o cliente passado como parametro ja exista no banco de dados
+     */
     public static void inserir(Cliente cliente, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
 
         final Gson gson = new Gson();

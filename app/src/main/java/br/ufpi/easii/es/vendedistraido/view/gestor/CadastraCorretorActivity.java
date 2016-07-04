@@ -18,7 +18,10 @@ import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
-
+/**
+ * Created by Jpegx.
+ * Classe responsavel por exibir a tela de cadastro de Corretor.
+ */
 public class CadastraCorretorActivity extends AppCompatActivity {
 
     private EditText edt_nome, edt_telefone, edt_email, edt_senha, edt_conf_senha;
@@ -62,6 +65,10 @@ public class CadastraCorretorActivity extends AppCompatActivity {
     private Context getContext(){
         return this;
     }
+    /**
+     * Metodo que transforma os dados do arquivo de preferencias no objeto Corretor logado na sessao.
+     * @return retorna o corretor logado ou null casso nao haja alguem logado
+     */
     private Gestor usuarioLogado(){
         SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
         if(sharedPreferences == null) return null;

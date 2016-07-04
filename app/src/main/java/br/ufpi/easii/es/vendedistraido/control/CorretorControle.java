@@ -27,12 +27,21 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.
+ * Classe responsavel pelo controle do fluxo dos usuarios do tipo corretor
  */
 public class CorretorControle {
     private static final String SEND_URL_INSERIR = Constantes.SERVER_URL+"AdicionaCorretor.php";
     private static final String SEND_URL_LISTAR = Constantes.SERVER_URL+"ListarCorretor.php";
     private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"PesquisarCorretor.php";
 
+    /**
+     * Metodo responsavel pela insercao de um novo usuario do tipo corretor
+     * @param corretor objeto do tipo corretor vindo da visao e que sera inserido no banco de dados
+     * @param gestor objeto do tipo gestor vindo da visao e que sera relacionado com o corretor que esta sendo inserido
+     * @param context contexto da view
+     * @throws ExcecaoDeErroDeConexao excecao que sera disparada caso exista erro na conexao
+     * @throws ExcecaoDeUsuarioJaExistente excecao que sera desparada caso o cliente passado como parametro ja exista no banco de dados
+     */
     public static void inserir(Corretor corretor, Gestor gestor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();
         final String jsonCorretor = gson.toJson(corretor);
@@ -64,6 +73,12 @@ public class CorretorControle {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Metodo responsavel pela listagem de todos os corretores que sao gerenciados pelo gestor que foi passado como parametro
+     * @param gestor  gestor para que possa ser feito a listagem dos corretores que o mesmo gerencia
+     * @param context contexto da view
+     * @return retorna uma lista com todos os corretores encontrados para tais entradas
+     */
     public void pesquisar(Gestor gestor, Context context, MainInterface mainInterface){
         final Gson gson = new Gson();
         final String jsonGestor = gson.toJson(gestor);
