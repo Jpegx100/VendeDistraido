@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="25dp"
-        android:gravity="center">
+        android:gravity="center_horizontal">
 
 
         <EditText
@@ -27,6 +27,7 @@
             style="@style/DefaltEditText"
             android:id="@+id/main_edt_senha"
             android:hint="@string/senha"
+            android:inputType="textPassword"
             />
 
         <Button
