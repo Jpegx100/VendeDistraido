@@ -21,12 +21,19 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.
+ * Classe responsavel por controlar o fluxo de dados dos usuarios
  */
 public class UsuarioControle {
 
     private static final String SEND_URL = Constantes.SERVER_URL+"PesquisarUsuario.php";
 
-
+    /**
+     * Metodo responsavel por fazer uma requisicao ao servidor e retornar um usuario
+     * @param usuario usuario passado como parametro para ser procurado no bando de dados
+     * @param context contexto da view
+     * @param mainInterface Interface utilizada para implementar as classe responsaveis por passar os dados retornados no controle para a visao
+     * @throws ExcecaoDeUsuarioInexistente excecao que disparada caso o usuario passado como parametro nao exista no bando de dados
+     */
     public static void pesquisar(final Usuario usuario, Context context, MainInterface mainInterface) throws ExcecaoDeUsuarioInexistente {
         final Gson gson = new Gson();
         //Converte o objeto para JSON
