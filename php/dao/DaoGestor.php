@@ -38,8 +38,8 @@ function listarCorretores($objetoUsuario) {
 
     $id = $objetoUsuario->{'id'};
 
-    $query = mysql_query("SELECT id_usuario FROM corretor where id_gestor = '0'");
-
+    $query = mysql_query("SELECT id_usuario FROM corretor where id_gestor = '$id'");
+  
     $ids = '(';
 
     while ($row = mysql_fetch_array($query)) {
@@ -50,7 +50,6 @@ function listarCorretores($objetoUsuario) {
 
     $ids = $ids . ')';
     //echo $ids;
-
     $query2 = mysql_query("SELECT * FROM usuario where id in $ids ");
 
     $users = array();
