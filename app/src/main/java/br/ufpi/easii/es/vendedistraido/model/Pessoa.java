@@ -1,6 +1,7 @@
 package br.ufpi.easii.es.vendedistraido.model;
 
 /**
+ * Classe que modela o ator Pessoa
  * Created by Alexandre on 29/06/2016.
  */
 public class Pessoa {

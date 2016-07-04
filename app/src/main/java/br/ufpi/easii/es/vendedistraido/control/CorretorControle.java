@@ -12,10 +12,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 
-import java.util.ArrayList;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 ;
 
@@ -25,6 +22,7 @@ import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
+import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 
 /**
@@ -33,6 +31,7 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
 public class CorretorControle {
     private static final String SEND_URL_INSERIR = Constantes.SERVER_URL+"AdicionaCorretor.php";
     private static final String SEND_URL_LISTAR = Constantes.SERVER_URL+"ListarCorretor.php";
+    private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"PesquisarCorretor.php";
 
     public static void inserir(Corretor corretor, Gestor gestor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();
@@ -65,32 +64,24 @@ public class CorretorControle {
         requestQueue.add(stringRequest);
     }
 
-    public List<Corretor> listar(long idGestor, Context context){
+    public void pesquisar(Gestor gestor, Context context, MainInterface mainInterface){
         final Gson gson = new Gson();
-        final String jsonIdGestor = gson.toJson(idGestor);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_LISTAR,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("LOG", "response: " + response);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Toast.makeText(ClienteControle.this, "Verifique sua conexo!", Toast.LENGTH_LONG).show();
-                        Log.i("LOG", "erro: " + error.getMessage().toString());
-                    }
-                }) {
+        final String jsonGestor = gson.toJson(gestor);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR,
+
+                new RespostaSucessoListarCorretor(context, mainInterface),
+                new RespostaErroListarCorretor(context, mainInterface)
+                ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("objetoCorretor", jsonIdGestor);
+                params.put("objetoGestor", jsonGestor);
                 return params;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-        return new ArrayList<>();
+
     }
 }
