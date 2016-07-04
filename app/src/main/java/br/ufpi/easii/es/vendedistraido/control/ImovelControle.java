@@ -13,7 +13,6 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.zip.CheckedOutputStream;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeImovelInexistente;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoImovelJaExistente;
@@ -36,7 +35,7 @@ public class ImovelControle {
     public static void inserir(final Imovel imovel, Corretor corretor,Context context) throws ExcecaoImovelJaExistente{
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
-        final String jsonCorretor = gson.toJson(corretor);
+        final String jsonCorretor = gson.toJson(corretor.getId());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
                 new Response.Listener<String>() {
@@ -55,13 +54,11 @@ public class ImovelControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoImovel", jsonImovel);
-                params.put("objetoCorretor", jsonCorretor);
+                params.put("idCorretor", jsonCorretor);
 
                 return params;
             }
-
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
