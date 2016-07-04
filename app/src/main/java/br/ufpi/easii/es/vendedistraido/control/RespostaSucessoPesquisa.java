@@ -18,54 +18,37 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by jpegx on 7/2/2016.
  */
-public class Rec implements Response.Listener<String>{
+public class RespostaSucessoPesquisa implements Response.Listener<String>{
     private Usuario usuario;
     private MainInterface mainInterface;
     private Context context;
-    public  Rec(Usuario usuario, Context context, MainInterface mainInterface){
-        this.usuario = usuario;
+    public RespostaSucessoPesquisa(Context context, MainInterface mainInterface){
+        this.usuario = new Usuario(-1, "","","","");
         this.mainInterface = mainInterface;
         this.context = context;
-        Log.i("NOSSO","\nTU"+this.usuario+"\n|U"+usuario);
     }
     @Override
     public void onResponse(String response) {
         Log.i("LOG", "response: " + response);
         Gson gson = new Gson();
-        Usuario usuarioLogado;
+        Usuario usuarioLogado = new Usuario(-1,"","","","");
         String[] rep = response.split("!=>");
         if(rep[1].equals("cl")){
-
             usuarioLogado = gson.fromJson(rep[0],Cliente.class);
-
-            usuario.setId(usuarioLogado.getId());
-            usuario.setNome(usuarioLogado.getNome()+"!=>cl");
-            usuario.setEmail(usuarioLogado.getEmail());
-            usuario.setSenha(usuarioLogado.getSenha());
-            usuario.setTelefone(usuarioLogado.getTelefone());
-
-
         }
         if(rep[1].equals("co")){
             usuarioLogado = gson.fromJson(rep[0],Corretor.class);
-
-            usuario.setId(usuarioLogado.getId());
-            usuario.setNome(usuarioLogado.getNome()+"!=>co");
-            usuario.setEmail(usuarioLogado.getEmail());
-            usuario.setSenha(usuarioLogado.getSenha());
-            usuario.setTelefone(usuarioLogado.getTelefone());
         }
-        if(rep[1].equals("ge")){
-            usuarioLogado = gson.fromJson(rep[0],Gestor.class);
-
-            usuario.setId(usuarioLogado.getId());
-            usuario.setNome(usuarioLogado.getNome()+"!=>ge");
-            usuario.setEmail(usuarioLogado.getEmail());
-            usuario.setSenha(usuarioLogado.getSenha());
-            usuario.setTelefone(usuarioLogado.getTelefone());
+        if(rep[1].equals("ge")) {
+            usuarioLogado = gson.fromJson(rep[0], Gestor.class);
         }
-        Log.i("LOG", "response: " + usuario.getNome());
-        mainInterface.dadosLidos(usuario);
+        usuario.setId(usuarioLogado.getId());
+        usuario.setNome(usuarioLogado.getNome());
+        usuario.setEmail(usuarioLogado.getEmail());
+        usuario.setSenha(usuarioLogado.getSenha());
+        usuario.setTelefone(usuarioLogado.getTelefone());
+        //Utiliza a interface para chamar o metodo que trata do sucesso na leitura dos dados
+        mainInterface.dadosLidos(usuarioLogado);
         Toast t = Toast.makeText(context, usuario.getNome(), Toast.LENGTH_LONG);
         t.show();
     }

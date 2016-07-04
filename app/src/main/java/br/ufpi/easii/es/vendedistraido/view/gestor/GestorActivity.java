@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.GestorControle;
@@ -23,6 +24,7 @@ public class GestorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestor);
+        Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
         btn_corretores = (Button)findViewById(R.id.gestor_btn_corretores);
         btn_corretores.setOnClickListener(onClickCorretores());
         btn_imoveis = (Button)findViewById(R.id.gestor_btn_imoveis);

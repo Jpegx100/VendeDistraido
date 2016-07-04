@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class CorretorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corretor);
-
+        Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
         /*btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
 

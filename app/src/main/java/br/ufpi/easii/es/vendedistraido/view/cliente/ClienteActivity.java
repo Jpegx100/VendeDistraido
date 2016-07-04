@@ -2,6 +2,7 @@ package br.ufpi.easii.es.vendedistraido.view.cliente;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import br.ufpi.easii.es.vendedistraido.R;
 
@@ -13,5 +14,6 @@ public class ClienteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente);
+        Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
     }
 }

@@ -11,18 +11,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
-import br.ufpi.easii.es.vendedistraido.model.Cliente;
-import br.ufpi.easii.es.vendedistraido.model.Corretor;
-import br.ufpi.easii.es.vendedistraido.model.Gestor;
-import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.model.Usuario;
-import br.ufpi.easii.es.vendedistraido.view.MainActivity;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
@@ -35,23 +28,17 @@ public class UsuarioControle {
 
     public static void pesquisar(final Usuario usuario, Context context, MainInterface mainInterface) throws ExcecaoDeUsuarioInexistente {
         final Gson gson = new Gson();
+        //Converte o objeto para JSON
         final String jsonUsuario = gson.toJson(usuario);
-        final String type;
         Usuario usr = new Usuario(-1,"","","","");
-
         /*Inicializacaoo da StringRequest, tendo como parametros: o metodo a ser utilizado(POST);
         * a URL da requisicao(SEND_URL); o objeto que implementa a Interface Response.Listener que ira tratar
         * o resultado da requisicao em caso de sucesso; e uma instancia da classe a ser utilizada em caso de erro.
          */
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL,
-                new Rec(usr, context, mainInterface),
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Toast.makeText(ClienteControle.this, "Verifique sua conexão!", Toast.LENGTH_LONG).show();
-                        Log.i("LOG", "erro: " + error.getMessage().toString());
-                    }
-                }) {
+                //Chama os metodos de sucesso e erro passando o contexto e a instancia da interface necessitada
+                new RespostaSucessoPesquisa(context, mainInterface),
+                new RespostaErroPesquisa(context, mainInterface)) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -63,15 +50,4 @@ public class UsuarioControle {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
-/**
- public static Usuario pesquisar(String email, String senha) {
- ArrayList<Corretor> corretores = new ArrayList<Corretor>();
- corretores.add(new Corretor(9, "corretor","em","s","w",new ArrayList<Imovel>()));
- corretores.add(new Corretor(19, "corretor","em","s","w",new ArrayList<Imovel>()));
- corretores.add(new Corretor(29, "corretor","em","s","w",new ArrayList<Imovel>()));
- corretores.add(new Corretor(39, "corretor","em","s","w",new ArrayList<Imovel>()));
- corretores.add(new Corretor(49, "corretor","em","s","w",new ArrayList<Imovel>()));
- Gestor gestor = new Gestor(1,"nome",email, senha,"999",corretores);
- return gestor;
- }**/
 }

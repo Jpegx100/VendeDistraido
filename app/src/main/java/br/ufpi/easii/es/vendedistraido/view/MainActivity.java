@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
@@ -40,28 +41,10 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
         return new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String senha = edt_senha.getText().toString();
                 String email = edt_email.getText().toString();
-                Usuario usuario = null;
                 try {
-                    usuario = UsuarioControle.pesquisar(new Usuario(-1, "", email, "", ""), getContext(), MainActivity.this);
-                    Log.i("USUARIO", usuario.toString());
-                    if(usuario instanceof Cliente){
-                        Log.i("LOGIN", "Cliente Logado");
-                        Intent intent = new Intent(getContext(), ClienteActivity.class);
-                        intent.putExtra(ClienteActivity.ID_CLIENTE, usuario.getId());
-                        startActivity(intent);
-                    }else if(usuario instanceof Gestor){
-                        Log.i("LOGIN", "Gestor Logado");
-                        Intent intent = new Intent(getContext(), GestorActivity.class);
-                        intent.putExtra(GestorActivity.ID_GESTOR, usuario.getId());
-                        startActivity(intent);
-                    }else if(usuario instanceof Corretor){
-                        Log.i("LOGIN", "Gestor Logado");
-                        Intent intent = new Intent(getContext(), CorretorActivity.class);
-                        intent.putExtra(CorretorActivity.ID_CORRETOR, usuario.getId());
-                        startActivity(intent);
-                    }
+                    //Chama o metodo de Pesquisa passando o usuario a ser pesquisado; o contexto; e a instacia da activity
+                    UsuarioControle.pesquisar(new Usuario(-1, "", email, "", ""), getContext(), MainActivity.this);
                 } catch (ExcecaoDeUsuarioInexistente excecaoDeUsuarioInexistente) {
                     excecaoDeUsuarioInexistente.printStackTrace();
                 }
@@ -84,6 +67,25 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
 
     @Override
     public void dadosLidos(Usuario dados) {
-        Log.i("DADOS_LIDOS", dados.getNome());
+        Log.i("USUARIO", dados.getClass().getName());
+        if(dados instanceof Cliente){
+            Intent intent = new Intent(getContext(), ClienteActivity.class);
+            startActivity(intent);
+            Log.i("TYPE","Cliente");
+        }
+        if(dados instanceof Corretor){
+            Intent intent = new Intent(getContext(), CorretorActivity.class);
+            startActivity(intent);
+            Log.i("TYPE","Corretor");
+        }
+        if(dados instanceof Gestor){
+            Intent intent = new Intent(getContext(), GestorActivity.class);
+            startActivity(intent);
+            Log.i("TYPE","Gestor");
+        }
+    }
+    @Override
+    public void dadosNaoLidos(){
+        Log.e("ERROR", "Usuario NAO ENCONTRADO");
     }
 }
