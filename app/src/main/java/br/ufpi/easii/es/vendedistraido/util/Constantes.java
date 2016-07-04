@@ -1,4 +1,4 @@
-package br.ufpi.easii.es.vendedistraido.view;
+package br.ufpi.easii.es.vendedistraido.util;
 
 /**
  * Created by jpegx on 7/4/2016.
@@ -10,4 +10,5 @@ public class Constantes {
     public static String USER_LOGIN_EMAIL = "user_login_email";
     public static String USER_LOGIN_TELEFONE = "user_login_telefone";
     public static String USER = "user";
+    public static String SERVER_URL = "http://10.28.15.61/VendeDistraido/main/";
 }

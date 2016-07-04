@@ -6,19 +6,16 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.ufpi.easii.es.vendedistraido.R;
-import br.ufpi.easii.es.vendedistraido.control.CorretorControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
-import br.ufpi.easii.es.vendedistraido.view.Constantes;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 public class CorretorActivity extends AppCompatActivity {
     private Button btn_cadastrar;

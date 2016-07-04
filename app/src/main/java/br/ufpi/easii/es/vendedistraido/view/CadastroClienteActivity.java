@@ -14,7 +14,7 @@ import br.ufpi.easii.es.vendedistraido.control.ClienteControle;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
-import br.ufpi.easii.es.vendedistraido.model.Usuario;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.cliente.ClienteActivity;
 
 public class CadastroClienteActivity extends AppCompatActivity {

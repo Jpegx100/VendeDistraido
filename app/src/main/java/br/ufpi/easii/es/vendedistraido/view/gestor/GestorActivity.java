@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,14 +12,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.ufpi.easii.es.vendedistraido.R;
-import br.ufpi.easii.es.vendedistraido.control.GestorControle;
-import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
-import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
-import br.ufpi.easii.es.vendedistraido.model.Imovel;
-import br.ufpi.easii.es.vendedistraido.model.Usuario;
-import br.ufpi.easii.es.vendedistraido.view.Constantes;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 public class GestorActivity extends AppCompatActivity {
     public static final String ID_GESTOR = "id_gestor";

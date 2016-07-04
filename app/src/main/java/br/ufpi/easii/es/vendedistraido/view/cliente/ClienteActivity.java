@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
-import br.ufpi.easii.es.vendedistraido.view.Constantes;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 public class ClienteActivity extends AppCompatActivity {
 

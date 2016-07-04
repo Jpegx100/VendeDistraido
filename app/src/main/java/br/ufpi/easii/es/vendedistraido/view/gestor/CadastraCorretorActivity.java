@@ -1,7 +1,6 @@
 package br.ufpi.easii.es.vendedistraido.view.gestor;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,16 +12,11 @@ import java.util.ArrayList;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.CorretorControle;
-import br.ufpi.easii.es.vendedistraido.control.GestorControle;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
-import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
-import br.ufpi.easii.es.vendedistraido.model.Imovel;
-import br.ufpi.easii.es.vendedistraido.view.Constantes;
-
-import static br.ufpi.easii.es.vendedistraido.control.CorretorControle.*;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 public class CadastraCorretorActivity extends AppCompatActivity {
 

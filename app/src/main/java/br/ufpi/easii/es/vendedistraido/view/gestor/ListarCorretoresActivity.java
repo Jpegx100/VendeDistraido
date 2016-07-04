@@ -5,22 +5,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import br.ufpi.easii.es.vendedistraido.R;
-import br.ufpi.easii.es.vendedistraido.control.CorretorControle;
-import br.ufpi.easii.es.vendedistraido.control.GestorControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
-import br.ufpi.easii.es.vendedistraido.view.Constantes;
-import br.ufpi.easii.es.vendedistraido.view.corretor.CorretorActivity;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 public class ListarCorretoresActivity extends AppCompatActivity {
     private ListView list_corretores;

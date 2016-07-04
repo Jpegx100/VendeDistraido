@@ -23,6 +23,7 @@ import java.util.Map;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
+import br.ufpi.easii.es.vendedistraido.model.Gestor;
 
 
 /**
@@ -32,9 +33,10 @@ public class CorretorControle {
     private static final String SEND_URL_INSERIR = Contantes.SERVER_URL+"AdicionaCorretor.php";
     private static final String SEND_URL_LISTAR = Contantes.SERVER_URL+"ListarCorretor.php";
 
-    public static void inserir(Corretor corretor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
+    public static void inserir(Corretor corretor, Gestor gestor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();
         final String jsonCorretor = gson.toJson(corretor);
+        final String jsonGestor = gson.toJson(gestor);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
                 new Response.Listener<String>() {
                     @Override
@@ -53,6 +55,7 @@ public class CorretorControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoCorretor", jsonCorretor);
+                params.put("objetoGestor", jsonGestor);
 
                 return params;
             }
