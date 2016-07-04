@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.ufpi.easii.es.vendedistraido">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +14,17 @@
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.CadastroClienteActivity" />
+        <activity android:name=".view.gestor.GestorActivity" />
+        <activity android:name=".view.corretor.CorretorActivity" />
+        <activity android:name=".view.gestor.CadastraCorretorActivity" />
+        <activity android:name=".view.corretor.CadastraImovelActivity" />
+        <activity android:name=".view.cliente.ClienteActivity" />
+        <activity android:name=".view.gestor.ListarCorretoresActivity" />
+        <activity android:name=".view.gestor.ListarImoveisActivity"></activity>
     </application>
 
 </manifest>

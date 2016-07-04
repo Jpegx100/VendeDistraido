@@ -7,38 +7,34 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".view.MainActivity">
-
+    tools:context=".view.corretor.CadastraImovelActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:gravity="center_horizontal"
         android:layout_margin="25dp"
-        android:gravity="center_horizontal">
-
-
-        <EditText
-            style="@style/DefaltEditText"
-            android:id="@+id/main_edt_email"
-            android:hint="@string/email"
-             />
+        android:orientation="vertical">
 
         <EditText
             style="@style/DefaltEditText"
-            android:id="@+id/main_edt_senha"
-            android:hint="@string/senha"
-            android:inputType="textPassword"
-            />
-
+            android:id="@+id/cadastra_imovel_edt_titulo"
+            android:hint="@string/titulo"/>
+        <EditText
+            style="@style/DefaltEditText"
+            android:id="@+id/cadastra_imovel_edt_latitude"
+            android:hint="@string/latitude"/>
+        <EditText
+            style="@style/DefaltEditText"
+            android:id="@+id/cadastra_imovel_edt_longitude"
+            android:hint="@string/longitude"/>
+        <EditText
+            style="@style/DefaltEditText"
+            android:id="@+id/cadastra_imovel_edt_endereco"
+            android:hint="@string/endereco"/>
         <Button
             style="@style/DefaltButton"
-            android:text="@string/entrar"
-            android:id="@+id/main_btn_entrar"
-           />
-        <Button
-            style="@style/DefaltButton"
-            android:text="@string/cadastre_se"
-            android:id="@+id/main_btn_cadastrar"
-            />
+            android:id="@+id/cadastra_imovel_btn_cadastrar"
+            android:text="@string/cadastrar"/>
     </LinearLayout>
 </RelativeLayout>
+
