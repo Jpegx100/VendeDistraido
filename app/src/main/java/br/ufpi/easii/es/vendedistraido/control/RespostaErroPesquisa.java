@@ -12,6 +12,7 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
  * Created by jpegx on 7/3/2016.
+ * Classe responsavel por informar a view quando ouver um erro na requisicao dos dados para uma pesquisa de usuario
  */
 public class RespostaErroPesquisa implements Response.ErrorListener {
     private Usuario usuario;
