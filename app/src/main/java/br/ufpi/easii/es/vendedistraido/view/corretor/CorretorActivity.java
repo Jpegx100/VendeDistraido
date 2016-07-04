@@ -2,6 +2,7 @@ package br.ufpi.easii.es.vendedistraido.view.corretor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,17 +18,19 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.CorretorControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
+import br.ufpi.easii.es.vendedistraido.view.Constantes;
 
 public class CorretorActivity extends AppCompatActivity {
     private Button btn_cadastrar;
     private ListView lista_imoveis;
     public static String ID_CORRETOR = "id_corretor";
-    public Corretor corretor;
+    private Corretor corretor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corretor);
         Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
+        this.corretor = usuarioLogado();
         /*btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
 
@@ -46,6 +49,18 @@ public class CorretorActivity extends AppCompatActivity {
         }else{
             onDestroy();
         }*/
+    }
+    private Corretor usuarioLogado(){
+        SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
+        if(sharedPreferences == null) return null;
+        Corretor corretor = new Corretor(sharedPreferences.getLong(Constantes.USER_LOGIN_ID,-1),
+                sharedPreferences.getString(Constantes.USER_LOGIN_NOME,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_EMAIL,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_SENHA,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_TELEFONE,"-1"),
+                //Pegar LISTA de IMOVEIS
+                new ArrayList<Imovel>());
+        return corretor;
     }
     private View.OnClickListener onClickCadastrar(){
         return new View.OnClickListener() {

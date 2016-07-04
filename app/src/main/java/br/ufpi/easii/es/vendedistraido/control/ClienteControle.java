@@ -28,7 +28,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ClienteControle {
 
-    private static final String SEND_URL = "http://10.0.0.103/VendeDistraido/main/AdicionaCliente.php";
+    private static final String SEND_URL = Contantes.SERVER_URL+"AdicionaCliente.php";
 
     public static void inserir(Cliente cliente, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
 

@@ -25,12 +25,12 @@ import br.ufpi.easii.es.vendedistraido.model.Imovel;
  * Created by Alexandre on 01/07/2016.
  */
 public class ImovelControle {
-    private static final String SEND_URL_INSERIR = "http://10.28.15.49/VendeDistraido/main/AdicionaImovel.php";
-    private static final String SEND_URL_REMOVER = "http://10.28.15.49/VendeDistraido/main/RemoveImovel.php";
-    private static final String SEND_URL_EDITAR = "http://10.28.15.49/VendeDistraido/main/EditaImovel.php";
-    private static final String SEND_URL_PESQUISAR_POR_CORRETOR = "http://10.28.15.49/VendeDistraido/main/ListaImovelPorCorretor.php";
-    private static final String SEND_URL_PESQUISAR_TODOS = "http://10.28.15.49/VendeDistraido/main/ListaImovel.php";
-    private static final String SEND_URL_PESQUISAR = "http://10.28.15.49/VendeDistraido/main/PesquisaImovel.php";
+    private static final String SEND_URL_INSERIR = Contantes.SERVER_URL+"AdicionaImovel.php";
+    private static final String SEND_URL_REMOVER = Contantes.SERVER_URL+"RemoveImovel.php";
+    private static final String SEND_URL_EDITAR = Contantes.SERVER_URL+"EditaImovel.php";
+    private static final String SEND_URL_PESQUISAR_POR_CORRETOR = Contantes.SERVER_URL+"ListaImovelPorCorretor.php";
+    private static final String SEND_URL_PESQUISAR_TODOS = Contantes.SERVER_URL+"ListaImovel.php";
+    private static final String SEND_URL_PESQUISAR = Contantes.SERVER_URL+"PesquisaImovel.php";
 
     public static void inserir(final Imovel imovel, Corretor corretor,Context context) throws ExcecaoImovelJaExistente{
         final Gson gson = new Gson();

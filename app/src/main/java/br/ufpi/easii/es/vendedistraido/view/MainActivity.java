@@ -2,6 +2,7 @@ package br.ufpi.easii.es.vendedistraido.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,26 +67,42 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
     }
 
     @Override
-    public void dadosLidos(Usuario dados) {
+    public void dadosLidos(Object dados) {
         Log.i("USUARIO", dados.getClass().getName());
-        if(dados instanceof Cliente){
-            Intent intent = new Intent(getContext(), ClienteActivity.class);
-            startActivity(intent);
-            Log.i("TYPE","Cliente");
-        }
-        if(dados instanceof Corretor){
-            Intent intent = new Intent(getContext(), CorretorActivity.class);
-            startActivity(intent);
-            Log.i("TYPE","Corretor");
-        }
-        if(dados instanceof Gestor){
-            Intent intent = new Intent(getContext(), GestorActivity.class);
-            startActivity(intent);
-            Log.i("TYPE","Gestor");
+        if(dados instanceof Usuario) {
+            /*if(((Usuario) dados).getSenha() != edt_senha.getText().toString()){
+                edt_senha.setText("");
+                edt_email.setText("");
+                Toast t = Toast.makeText(getContext(), "Senha Incorreta!", Toast.LENGTH_LONG);
+            }else {*/
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(Constantes.USER_LOGIN_EMAIL, ((Usuario) dados).getEmail());
+                editor.putString(Constantes.USER_LOGIN_NOME, ((Usuario) dados).getNome());
+                editor.putString(Constantes.USER_LOGIN_SENHA, ((Usuario) dados).getSenha());
+                editor.putString(Constantes.USER_LOGIN_TELEFONE, ((Usuario) dados).getTelefone());
+                editor.putLong(Constantes.USER_LOGIN_ID, ((Usuario) dados).getId());
+                editor.apply();
+                if (dados instanceof Cliente) {
+                    Intent intent = new Intent(getContext(), ClienteActivity.class);
+                    startActivity(intent);
+                    Log.i("TYPE", "Cliente");
+                }
+                if (dados instanceof Corretor) {
+                    Intent intent = new Intent(getContext(), CorretorActivity.class);
+                    startActivity(intent);
+                    Log.i("TYPE", "Corretor");
+                }
+                if (dados instanceof Gestor) {
+                    Intent intent = new Intent(getContext(), GestorActivity.class);
+                    startActivity(intent);
+                    Log.i("TYPE", "Gestor");
+                }
+            //}
         }
     }
     @Override
-    public void dadosNaoLidos(){
+    public void dadosNaoLidos(Exception e){
         Log.e("ERROR", "Usuario NAO ENCONTRADO");
     }
 }

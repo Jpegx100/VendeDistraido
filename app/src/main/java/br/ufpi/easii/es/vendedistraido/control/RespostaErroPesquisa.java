@@ -6,6 +6,7 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
 import br.ufpi.easii.es.vendedistraido.model.Usuario;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
@@ -25,6 +26,6 @@ public class RespostaErroPesquisa implements Response.ErrorListener {
     public void onErrorResponse(VolleyError error) {
         Log.i("LOG", "erro: " + error.getMessage().toString());
         //Chama o metodo utilizado para tratar erro na leitura dos dados
-        mainInterface.dadosNaoLidos();
+        mainInterface.dadosNaoLidos(new ExcecaoDeUsuarioInexistente());
     }
 }

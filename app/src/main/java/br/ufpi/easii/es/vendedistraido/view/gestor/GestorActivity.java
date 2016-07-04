@@ -2,6 +2,7 @@ package br.ufpi.easii.es.vendedistraido.view.gestor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,12 +10,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.GestorControle;
 import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
+import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
+import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.model.Usuario;
+import br.ufpi.easii.es.vendedistraido.view.Constantes;
 
 public class GestorActivity extends AppCompatActivity {
     public static final String ID_GESTOR = "id_gestor";
@@ -31,21 +37,7 @@ public class GestorActivity extends AppCompatActivity {
         btn_imoveis.setOnClickListener(onClickImoveis());
         btn_relatorios = (Button)findViewById(R.id.gestor_btn_relatorios);
         btn_relatorios.setOnClickListener(onClickRelatorios());
-        Intent intent = getIntent();
-        if(intent.hasExtra(ID_GESTOR)) {
-            long id = intent.getLongExtra(ID_GESTOR, -1);
-            if (id != -1) {
-                Log.i("LOGIN", "Gestor id="+id+" logado.");
-                /*try {
-                    gestor = (Gestor) UsuarioControle.pesquisar(new Usuario(id, "", "", "", ""), getContext());
-                } catch (ExcecaoDeUsuarioInexistente excecaoDeUsuarioInexistente) {
-                    Log.e("ERROR", "USUARIO NAO ENCONTRAR!");
-                    excecaoDeUsuarioInexistente.printStackTrace();
-                }*/
-            }
-        }else{
-            //Retornar ao login!
-        }
+        this.gestor = usuarioLogado();
     }
 
     private View.OnClickListener onClickCorretores() {
@@ -53,7 +45,6 @@ public class GestorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ListarCorretoresActivity.class);
-                intent.putExtra(ID_GESTOR, gestor.getId());
                 startActivity(intent);
             }
         };
@@ -81,5 +72,17 @@ public class GestorActivity extends AppCompatActivity {
 
     private Context getContext(){
         return this;
+    }
+    private Gestor usuarioLogado(){
+        SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
+        if(sharedPreferences == null) return null;
+        Gestor gestor = new Gestor(sharedPreferences.getLong(Constantes.USER_LOGIN_ID,-1),
+                sharedPreferences.getString(Constantes.USER_LOGIN_NOME,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_EMAIL,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_SENHA,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_TELEFONE,"-1"),
+                //Pegar LISTA de IMOVEIS
+                new ArrayList<Corretor>());
+        return gestor;
     }
 }

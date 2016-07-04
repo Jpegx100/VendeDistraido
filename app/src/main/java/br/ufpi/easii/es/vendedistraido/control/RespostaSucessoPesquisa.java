@@ -42,14 +42,7 @@ public class RespostaSucessoPesquisa implements Response.Listener<String>{
         if(rep[1].equals("ge")) {
             usuarioLogado = gson.fromJson(rep[0], Gestor.class);
         }
-        usuario.setId(usuarioLogado.getId());
-        usuario.setNome(usuarioLogado.getNome());
-        usuario.setEmail(usuarioLogado.getEmail());
-        usuario.setSenha(usuarioLogado.getSenha());
-        usuario.setTelefone(usuarioLogado.getTelefone());
         //Utiliza a interface para chamar o metodo que trata do sucesso na leitura dos dados
         mainInterface.dadosLidos(usuarioLogado);
-        Toast t = Toast.makeText(context, usuario.getNome(), Toast.LENGTH_LONG);
-        t.show();
     }
 }

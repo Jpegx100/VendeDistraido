@@ -1,6 +1,8 @@
 package br.ufpi.easii.es.vendedistraido.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,8 @@ import br.ufpi.easii.es.vendedistraido.control.ClienteControle;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
+import br.ufpi.easii.es.vendedistraido.model.Usuario;
+import br.ufpi.easii.es.vendedistraido.view.cliente.ClienteActivity;
 
 public class CadastroClienteActivity extends AppCompatActivity {
 
@@ -50,15 +54,27 @@ public class CadastroClienteActivity extends AppCompatActivity {
 
                 try {
                     ClienteControle.inserir(cliente,context);
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(Constantes.USER_LOGIN_EMAIL, (cliente.getEmail()));
+                    editor.putString(Constantes.USER_LOGIN_NOME, (cliente.getNome()));
+                    editor.putString(Constantes.USER_LOGIN_SENHA, (cliente.getSenha()));
+                    editor.putString(Constantes.USER_LOGIN_TELEFONE, (cliente.getTelefone()));
+                    editor.putLong(Constantes.USER_LOGIN_ID, (cliente.getId()));
+                    editor.apply();
+                    Intent intent = new Intent(getContext(), ClienteActivity.class);
+                    startActivity(intent);
                 } catch (ExcecaoDeErroDeConexao excecaoDeErroDeConexao) {
                     excecaoDeErroDeConexao.printStackTrace();
                 } catch (ExcecaoDeUsuarioJaExistente excecaoDeUsuarioJaExistente) {
                     excecaoDeUsuarioJaExistente.printStackTrace();
                 }
-
-
             }//fim botao
         };
+    }
+
+    private Context getContext() {
+        return this.context;
     }
 
     public Button getBtn_cadastrar() {

@@ -2,6 +2,7 @@ package br.ufpi.easii.es.vendedistraido.view.gestor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
+import br.ufpi.easii.es.vendedistraido.view.Constantes;
 
 import static br.ufpi.easii.es.vendedistraido.control.CorretorControle.*;
 
@@ -38,13 +40,8 @@ public class CadastraCorretorActivity extends AppCompatActivity {
         edt_conf_senha = (EditText)findViewById(R.id.cadastra_corretor_edt_confirme_senha);
         btn_cadastrar = (Button) findViewById(R.id.cadastra_corretor_btn_cadastrar);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
-
-        Intent intent = getIntent();
-        if(intent.hasExtra(GestorActivity.ID_GESTOR)){
-            gestor = GestorControle.pesquisar(intent.getLongExtra(GestorActivity.ID_GESTOR,-1));
-        }
+        gestor = usuarioLogado();
     }
-
     private View.OnClickListener onClickCadastrar(){
         return new View.OnClickListener() {
             @Override
@@ -66,5 +63,17 @@ public class CadastraCorretorActivity extends AppCompatActivity {
     }
     private Context getContext(){
         return this;
+    }
+    private Gestor usuarioLogado(){
+        SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
+        if(sharedPreferences == null) return null;
+        Gestor gestor = new Gestor(sharedPreferences.getLong(Constantes.USER_LOGIN_ID,-1),
+                sharedPreferences.getString(Constantes.USER_LOGIN_NOME,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_EMAIL,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_SENHA,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_TELEFONE,"-1"),
+                //Pegar LISTA de Corretores
+                new ArrayList<Corretor>());
+        return gestor;
     }
 }

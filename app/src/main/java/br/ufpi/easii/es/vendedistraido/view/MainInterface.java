@@ -7,6 +7,6 @@ import br.ufpi.easii.es.vendedistraido.model.Usuario;
  * Interface que define os metodo a tratar dos dados lidos ou nao lidos.
  */
 public interface MainInterface {
-    public void dadosLidos(Usuario dados);
-    public void dadosNaoLidos();
+    public void dadosLidos(Object dados);
+    public void dadosNaoLidos(Exception e);
 }

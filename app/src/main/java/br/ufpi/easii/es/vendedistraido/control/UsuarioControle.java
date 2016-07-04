@@ -23,7 +23,7 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
  */
 public class UsuarioControle {
 
-    private static final String SEND_URL = "http://10.0.0.103/VendeDistraido/main/Pesquisar.php";
+    private static final String SEND_URL = Contantes.SERVER_URL+"Pesquisar.php";
 
 
     public static void pesquisar(final Usuario usuario, Context context, MainInterface mainInterface) throws ExcecaoDeUsuarioInexistente {
