@@ -32,7 +32,7 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 public class CorretorControle {
     private static final String SEND_URL_INSERIR = Constantes.SERVER_URL+"AdicionaCorretor.php";
     private static final String SEND_URL_LISTAR = Constantes.SERVER_URL+"ListarCorretor.php";
-    private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"PesquisarCorretor.php";
+    private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"ListarCorretores.php";
 
     /**
      * Metodo responsavel pela insercao de um novo usuario do tipo corretor
@@ -45,7 +45,7 @@ public class CorretorControle {
     public static void inserir(Corretor corretor, Gestor gestor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();
         final String jsonCorretor = gson.toJson(corretor);
-        final String jsonGestor = gson.toJson(gestor);
+        final String jsonGestor = gson.toJson(gestor.getId());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
                 new Response.Listener<String>() {
                     @Override
@@ -64,8 +64,7 @@ public class CorretorControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoCorretor", jsonCorretor);
-                params.put("objetoGestor", jsonGestor);
-
+                params.put("idGestor", jsonGestor);
                 return params;
             }
         };
@@ -84,7 +83,6 @@ public class CorretorControle {
         final String jsonGestor = gson.toJson(gestor);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR,
-
                 new RespostaSucessoListarCorretor(context, mainInterface),
                 new RespostaErroListarCorretor(context, mainInterface)
                 ) {
@@ -97,6 +95,5 @@ public class CorretorControle {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-
     }
 }

@@ -22,9 +22,11 @@
         <Button
             style="@style/DefaltButton"
             android:id="@+id/gestor_btn_imoveis"
+            android:enabled="false"
             android:text="@string/imoveis"/>
         <Button
             style="@style/DefaltButton"
+            android:enabled="false"
             android:id="@+id/gestor_btn_relatorios"
             android:text="@string/relatorios"/>
     </LinearLayout>

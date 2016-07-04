@@ -14,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.ufpi.easii.es.vendedistraido.R;
+import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
@@ -40,7 +41,16 @@ public class CorretorActivity extends AppCompatActivity implements MainInterface
         this.corretor = usuarioLogado();
         btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
+        lista_imoveis = (ListView)findViewById(R.id.corretor_list_lista_imoveis);
+        ImovelControle.pesquisar(corretor, getContext(),CorretorActivity.this);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ImovelControle.pesquisar(corretor, getContext(),CorretorActivity.this);
+    }
+
     /**
      * Metodo que transforma os dados do arquivo de preferencias no objeto Corretor logado na sessao.
      * @return retorna o corretor logado ou null casso nao haja alguem logado

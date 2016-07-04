@@ -15,6 +15,7 @@ import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
+import br.ufpi.easii.es.vendedistraido.view.MainActivity;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
@@ -38,6 +39,7 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
         Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
         this.cliente = usuarioLogado();
         listView = (ListView)findViewById(R.id.cliente_list_imoveis);
+        ImovelControle.pesquisar(this, ClienteActivity.this);
     }
 
     /**

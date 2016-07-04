@@ -16,11 +16,13 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
+import br.ufpi.easii.es.vendedistraido.view.MainInterface;
+
 /**
  * Created by Jpegx.
  * Classe responsavel por exibir a tela de listagem de corretores de um determinado gestor.
  */
-public class ListarCorretoresActivity extends AppCompatActivity {
+public class ListarCorretoresActivity extends AppCompatActivity implements MainInterface{
     private ListView list_corretores;
     private Button btn_cadastrar;
     private Gestor gestor;
@@ -34,12 +36,6 @@ public class ListarCorretoresActivity extends AppCompatActivity {
         this.gestor = usuarioLogado();
 
         list_corretores = (ListView)findViewById(R.id.listar_corretor_list_corretores);
-        ArrayList<String> list = new ArrayList<String>();
-        for(Corretor corretor:gestor.getCorretores()){
-            list.add(corretor.getNome());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-        list_corretores.setAdapter(adapter);
     }
     /**
      * Metodo que transforma os dados do arquivo de preferencias no objeto Gestor logado na sessao.
@@ -68,5 +64,23 @@ public class ListarCorretoresActivity extends AppCompatActivity {
     }
     private Context getContext(){
         return this;
+    }
+
+    @Override
+    public void dadosLidos(Object dados) {
+        ArrayList<String> corret = new ArrayList<String>();
+        if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
+            if(((ArrayList) dados).get(0) instanceof Corretor){
+                for(Corretor i:(ArrayList<Corretor>)dados){
+                    corret.add(i.getNome());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, corret);
+                list_corretores.setAdapter(adapter);
+            }
+        }
+    }
+
+    @Override
+    public void dadosNaoLidos(Exception e) {
     }
 }

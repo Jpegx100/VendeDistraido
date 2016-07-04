@@ -15,6 +15,7 @@ import java.util.List;
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.CorretorControle;
 import br.ufpi.easii.es.vendedistraido.control.GestorControle;
+import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
@@ -32,8 +33,7 @@ public class ListarImoveisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listar_imoveis);
 
         list_imoveis = (ListView) findViewById(R.id.listar_imovel_list_imoveis);
-
-        listImoveis();
+        //ImovelControle.pesquisar();
     }
 
     public void listImoveis(){

@@ -28,8 +28,8 @@ public class RespostaSucessoListarCorretor implements Response.Listener<String> 
     }
     @Override
     public void onResponse(String response) {
-        Log.i("LOG", "response: " + response);
-        ArrayList<Corretor> corretor = new ArrayList<>();
+        Log.i("LOG", "responseZXX: " + response);
+        ArrayList<Corretor> corretor = new ArrayList<Corretor>();
         Gson gson = new Gson();
         try {
             JSONArray jsonArray = new JSONArray(response);
