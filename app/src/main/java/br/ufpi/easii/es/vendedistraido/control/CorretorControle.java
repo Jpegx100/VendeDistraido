@@ -24,14 +24,15 @@ import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.
  */
 public class CorretorControle {
-    private static final String SEND_URL_INSERIR = Contantes.SERVER_URL+"AdicionaCorretor.php";
-    private static final String SEND_URL_LISTAR = Contantes.SERVER_URL+"ListarCorretor.php";
+    private static final String SEND_URL_INSERIR = Constantes.SERVER_URL+"AdicionaCorretor.php";
+    private static final String SEND_URL_LISTAR = Constantes.SERVER_URL+"ListarCorretor.php";
 
     public static void inserir(Corretor corretor, Gestor gestor, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente {
         final Gson gson = new Gson();

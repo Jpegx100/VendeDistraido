@@ -16,6 +16,7 @@ import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioInexistente;
 import br.ufpi.easii.es.vendedistraido.model.Usuario;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
@@ -23,7 +24,7 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
  */
 public class UsuarioControle {
 
-    private static final String SEND_URL = Contantes.SERVER_URL+"Pesquisar.php";
+    private static final String SEND_URL = Constantes.SERVER_URL+"Pesquisar.php";
 
 
     public static void pesquisar(final Usuario usuario, Context context, MainInterface mainInterface) throws ExcecaoDeUsuarioInexistente {
