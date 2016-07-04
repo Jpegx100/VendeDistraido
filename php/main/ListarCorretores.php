@@ -1,12 +1,13 @@
 <?php
+
 require_once('../dao/ConfiguracaoDoServidor.php');
-require_once('../dao/DaoCorretor.php');
+require_once('../dao/DaoGestor.php');
 
 
-//$user = $_POST['objetoCorretor'];
+$user = $_POST['objetoGestor'];
 
-//$objetoUsuario = json_decode($user);
+$objetoUsuario = json_decode($user);
 
-//listarCorretores($objetoUsuario);
-print 'oi';
-listarCorretores();
+listarCorretores($objetoUsuario);
+
+//listarCorretores();

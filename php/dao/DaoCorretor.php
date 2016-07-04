@@ -1,12 +1,14 @@
 <?php
 
 include 'ConfiguracaoDoServidor.php';
+
 function adicionarCorretor($objetoUsuario, $idGestor) {
 
     $nome = $objetoUsuario->{'nome'};
     $telefone = $objetoUsuario->{'telefone'};
     $email = $objetoUsuario->{'email'};
     $senha = $objetoUsuario->{'senha'};
+
     $sqlInsertUsuario = "insert into usuario (email,nome,senha,telefone) values ('$email','$nome','$senha','$telefone')";
     $sqlTESTE1 = mysql_query($sqlInsertUsuario);
 
@@ -49,18 +51,18 @@ function deletarCorretor($objetoUsuario) {
 }
 
 //function listarCorretores($objetoUsuario) {
-function listarCorretores() {
-    //$id = $objetoUsuario->{'id'};
-    $id = '2';
-    $query = mysql_query("SELECT * FROM corretor where id_gestor = '$id'");
- 
-    $result = mysqli_query($query);
-    
-    $emparray = array();
-    while($row =mysqli_fetch_assoc($result))
-    {
-        $emparray[] = $row;
-    }
-    echo json_encode($emparray);
-    
-}
+//
+//    $id = $objetoUsuario->{'id'};
+//   
+//    $query = mysql_query("SELECT * FROM corretor where id_gestor = '$2'");
+// 
+//    $result = mysqli_query($query);
+//    
+//    $emparray = array();
+//    while($row =mysqli_fetch_assoc($result))
+//    {
+//        $emparray[] = $row;
+//    }
+//    echo json_encode($emparray);
+//    
+//}
