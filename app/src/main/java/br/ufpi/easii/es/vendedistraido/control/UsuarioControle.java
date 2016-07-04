@@ -22,60 +22,29 @@ import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.model.Usuario;
+import br.ufpi.easii.es.vendedistraido.view.MainActivity;
+import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.
  */
 public class UsuarioControle {
 
-    private static final String SEND_URL = "http://10.28.15.49/VendeDistraido/main/BuscarUsuario.php";
+    private static final String SEND_URL = "http://10.0.0.103/VendeDistraido/main/Pesquisar.php";
 
 
-    public static Usuario pesquisar(final Usuario usuario, Context context) throws ExcecaoDeUsuarioInexistente {
-
+    public static void pesquisar(final Usuario usuario, Context context, MainInterface mainInterface) throws ExcecaoDeUsuarioInexistente {
         final Gson gson = new Gson();
         final String jsonUsuario = gson.toJson(usuario);
         final String type;
+        Usuario usr = new Usuario(-1,"","","","");
 
+        /*Inicializacaoo da StringRequest, tendo como parametros: o metodo a ser utilizado(POST);
+        * a URL da requisicao(SEND_URL); o objeto que implementa a Interface Response.Listener que ira tratar
+        * o resultado da requisicao em caso de sucesso; e uma instancia da classe a ser utilizada em caso de erro.
+         */
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                         Usuario usuarioLogado;
-                        String[] rep = response.split("!=>");
-                        if(rep[1].equals("cl")){
-
-                            usuarioLogado = gson.fromJson(rep[0],Cliente.class);
-
-                            usuario.setId(usuarioLogado.getId());
-                            usuario.setNome(usuarioLogado.getNome()+"!=>cl");
-                            usuario.setEmail(usuarioLogado.getEmail());
-                            usuario.setSenha(usuarioLogado.getSenha());
-                            usuario.setTelefone(usuarioLogado.getTelefone());
-
-
-                        }
-                        if(rep[1].equals("co")){
-                            usuarioLogado = gson.fromJson(rep[0],Corretor.class);
-
-                            usuario.setId(usuarioLogado.getId());
-                            usuario.setNome(usuarioLogado.getNome()+"!=>co");
-                            usuario.setEmail(usuarioLogado.getEmail());
-                            usuario.setSenha(usuarioLogado.getSenha());
-                            usuario.setTelefone(usuarioLogado.getTelefone());
-                        }
-                       if(rep[1].equals("ge")){
-                            usuarioLogado = gson.fromJson(rep[0],Gestor.class);
-
-                            usuario.setId(usuarioLogado.getId());
-                            usuario.setNome(usuarioLogado.getNome()+"!=>ge");
-                            usuario.setEmail(usuarioLogado.getEmail());
-                            usuario.setSenha(usuarioLogado.getSenha());
-                            usuario.setTelefone(usuarioLogado.getTelefone());
-                        }
-                        Log.i("LOG", "response: " + response);
-                    }
-                },
+                new Rec(usr, context, mainInterface),
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -86,36 +55,23 @@ public class UsuarioControle {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("objetoCliente", jsonUsuario);
-
+                params.put("objetoUsuario", jsonUsuario);
                 return params;
             }
-
         };
-
+        //A RequestQueue eh criada e tem a stringRequest adicionada
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-
-            if(usuario.getNome().contains("!=>cl")){
-                return new Cliente(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getSenha(),usuario.getTelefone(),null);
-            }
-            if(usuario.getNome().contains("!=>co")){
-                return new Corretor(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getSenha(),usuario.getTelefone(),null);
-            }
-            if(usuario.getNome().contains("!=>ge")){
-                return new Gestor(usuario.getId(),usuario.getNome(),usuario.getEmail(),usuario.getSenha(),usuario.getTelefone(),null);
-            }
-        throw new ExcecaoDeUsuarioInexistente();
     }
 /**
-    public static Usuario pesquisar(String email, String senha) {
-        ArrayList<Corretor> corretores = new ArrayList<Corretor>();
-        corretores.add(new Corretor(9, "corretor","em","s","w",new ArrayList<Imovel>()));
-        corretores.add(new Corretor(19, "corretor","em","s","w",new ArrayList<Imovel>()));
-        corretores.add(new Corretor(29, "corretor","em","s","w",new ArrayList<Imovel>()));
-        corretores.add(new Corretor(39, "corretor","em","s","w",new ArrayList<Imovel>()));
-        corretores.add(new Corretor(49, "corretor","em","s","w",new ArrayList<Imovel>()));
-        Gestor gestor = new Gestor(1,"nome",email, senha,"999",corretores);
-        return gestor;
-    }**/
+ public static Usuario pesquisar(String email, String senha) {
+ ArrayList<Corretor> corretores = new ArrayList<Corretor>();
+ corretores.add(new Corretor(9, "corretor","em","s","w",new ArrayList<Imovel>()));
+ corretores.add(new Corretor(19, "corretor","em","s","w",new ArrayList<Imovel>()));
+ corretores.add(new Corretor(29, "corretor","em","s","w",new ArrayList<Imovel>()));
+ corretores.add(new Corretor(39, "corretor","em","s","w",new ArrayList<Imovel>()));
+ corretores.add(new Corretor(49, "corretor","em","s","w",new ArrayList<Imovel>()));
+ Gestor gestor = new Gestor(1,"nome",email, senha,"999",corretores);
+ return gestor;
+ }**/
 }

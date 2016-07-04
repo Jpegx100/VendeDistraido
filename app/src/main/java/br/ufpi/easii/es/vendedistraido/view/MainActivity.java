@@ -20,11 +20,10 @@ import br.ufpi.easii.es.vendedistraido.view.cliente.ClienteActivity;
 import br.ufpi.easii.es.vendedistraido.view.corretor.CorretorActivity;
 import br.ufpi.easii.es.vendedistraido.view.gestor.GestorActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainInterface{
 
     private EditText edt_email, edt_senha;
     private Button btn_entrar, btn_cadastrar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 String email = edt_email.getText().toString();
                 Usuario usuario = null;
                 try {
-                    usuario = UsuarioControle.pesquisar(new Usuario(-1, "", email, "", ""), getContext());
+                    usuario = UsuarioControle.pesquisar(new Usuario(-1, "", email, "", ""), getContext(), MainActivity.this);
                     Log.i("USUARIO", usuario.toString());
                     if(usuario instanceof Cliente){
                         Log.i("LOGIN", "Cliente Logado");
@@ -81,5 +80,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private Context getContext(){
         return this;
+    }
+
+    @Override
+    public void dadosLidos(Usuario dados) {
+        Log.i("DADOS_LIDOS", dados.getNome());
     }
 }

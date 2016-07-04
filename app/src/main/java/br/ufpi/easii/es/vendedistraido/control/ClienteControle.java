@@ -28,21 +28,17 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ClienteControle {
 
-    private static final String SEND_URL = "http://10.28.15.49/VendeDistraido/main/AdicionaCliente.php";
+    private static final String SEND_URL = "http://10.0.0.103/VendeDistraido/main/AdicionaCliente.php";
 
     public static void inserir(Cliente cliente, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
 
         final Gson gson = new Gson();
         final String jsonCliente = gson.toJson(cliente);
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         Log.i("LOG", "response: " + response);
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -61,13 +57,7 @@ public class ClienteControle {
             }
 
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
-
-
-        //insere no servidor
-
-        //redireciona para tela apropriada
     }
 }
