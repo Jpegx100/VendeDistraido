@@ -1,7 +1,5 @@
 <?php
-
 include 'ConfiguracaoDoServidor.php';
-
 function adicionarGestor($objetoUsuario) {
 
     $nome = $objetoUsuario->{'nome'};

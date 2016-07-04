@@ -1,5 +1,4 @@
 <?php
-
 include 'ConfiguracaoDoServidor.php';
 
 function pesquisarUsuario($objetoUsuario) {

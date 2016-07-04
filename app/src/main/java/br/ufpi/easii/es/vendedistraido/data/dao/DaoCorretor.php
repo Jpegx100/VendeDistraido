@@ -1,14 +1,12 @@
 <?php
 
 include 'ConfiguracaoDoServidor.php';
-
 function adicionarCorretor($objetoUsuario, $idGestor) {
 
     $nome = $objetoUsuario->{'nome'};
     $telefone = $objetoUsuario->{'telefone'};
     $email = $objetoUsuario->{'email'};
     $senha = $objetoUsuario->{'senha'};
-
     $sqlInsertUsuario = "insert into usuario (email,nome,senha,telefone) values ('$email','$nome','$senha','$telefone')";
     $sqlTESTE1 = mysql_query($sqlInsertUsuario);
 

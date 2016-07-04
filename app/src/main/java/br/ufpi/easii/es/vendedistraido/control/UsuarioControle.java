@@ -24,7 +24,7 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
  */
 public class UsuarioControle {
 
-    private static final String SEND_URL = Constantes.SERVER_URL+"Pesquisar.php";
+    private static final String SEND_URL = Constantes.SERVER_URL+"PesquisarUsuario.php";
 
 
     public static void pesquisar(final Usuario usuario, Context context, MainInterface mainInterface) throws ExcecaoDeUsuarioInexistente {

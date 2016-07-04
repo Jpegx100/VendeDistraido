@@ -3,7 +3,6 @@
 include 'ConfiguracaoDoServidor.php';
 
 function adicionarCliente($objetoUsuario) {
-    
     $nome = $objetoUsuario->{'nome'};
     $telefone = $objetoUsuario->{'telefone'};
     $email = $objetoUsuario->{'email'};

@@ -18,7 +18,6 @@ function adicionarImovel($objetoImovel) {
         echo 'NAO INSERIDO';
     }
 }
-
 function deletarImovel($objetoImovel) {
 
     $id = $objetoImovel->{'id'};
