@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,37 +17,34 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
+import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
-public class CorretorActivity extends AppCompatActivity {
+/**
+ * Created by Jpegx.
+ * Activity que implementa a interface MainInterface e e responsavel pela tela inicial do Corretor.
+ */
+public class CorretorActivity extends AppCompatActivity implements MainInterface{
     private Button btn_cadastrar;
     private ListView lista_imoveis;
     public static String ID_CORRETOR = "id_corretor";
     private Corretor corretor;
+    /**
+     * Metodo padrao
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corretor);
         Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
         this.corretor = usuarioLogado();
-        /*btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
+        btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
-
-        Intent intent = getIntent();
-        if(intent.hasExtra(ID_CORRETOR)){
-            long id = intent.getLongExtra(ID_CORRETOR, -1);
-            corretor = CorretorControle.pesquisar(id);
-            ArrayList<String> list = new ArrayList<String>();
-
-            for(Imovel imovel:corretor.getImoveis()){
-                list.add(imovel.getEndereco());
-            }
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-            lista_imoveis.setAdapter(adapter);
-        }else{
-            onDestroy();
-        }*/
     }
+    /**
+     * Metodo que transforma os dados do arquivo de preferencias no objeto Corretor logado na sessao.
+     * @return retorna o corretor logado ou null casso nao haja alguem logado
+     */
     private Corretor usuarioLogado(){
         SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
         if(sharedPreferences == null) return null;
@@ -71,5 +69,29 @@ public class CorretorActivity extends AppCompatActivity {
     }
     private Context getContext(){
         return this;
+    }
+    /**
+     * Metodo de view.MainInterface
+     * @param dados
+     */
+    @Override
+    public void dadosLidos(Object dados) {
+        ArrayList<String> imoveis = new ArrayList<String>();
+        if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
+            if(((ArrayList) dados).get(0) instanceof Imovel){
+                for(Imovel i:(ArrayList<Imovel>)dados){
+                    imoveis.add(i.getEndereco());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, imoveis);
+                lista_imoveis.setAdapter(adapter);
+            }
+        }
+    }
+    /**
+     * Metodo de view.MainInterface
+     * @param e
+     */
+    @Override
+    public void dadosNaoLidos(Exception e) {
     }
 }
