@@ -10,6 +10,6 @@ public class Constantes {
     public static String USER_LOGIN_SENHA = "user_login_SENHA";
     public static String USER_LOGIN_EMAIL = "user_login_email";
     public static String USER_LOGIN_TELEFONE = "user_login_telefone";
-    public static String USER = "user";
-    public static String SERVER_URL = "http://192.168.43.58/VendeDistraido/main/";
+    public static Stri  ng USER = "user";
+    public static String SERVER_URL = "http://10.28.15.49/VendeDistraido/main/";
 }
