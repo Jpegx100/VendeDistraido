@@ -11,6 +11,13 @@ public class Gestor extends Usuario{
     private List<Corretor> corretores;
 
     /**
+     * Construtor default para usuarios do tipo Gestor
+     */
+    public Gestor(){
+        super();
+    }
+
+    /**
      * Contrutor padrao da Classe de Gestor
      *
      * @param id = identificador unico do objeto Gestor

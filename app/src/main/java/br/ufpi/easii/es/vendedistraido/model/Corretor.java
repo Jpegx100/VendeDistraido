@@ -10,6 +10,13 @@ public class Corretor extends Usuario{
     private List<Imovel> imoveis;
 
     /**
+     * Construtor default para usuario do tipo Corretor
+     */
+    public Corretor(){
+        super();
+    }
+
+    /**
      * Contrutor padrao da Classe de Corretor
      *
      * @param id = identificador unico do objeto Corretor

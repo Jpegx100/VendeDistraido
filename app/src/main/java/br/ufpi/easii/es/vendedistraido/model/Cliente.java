@@ -10,6 +10,13 @@ public class Cliente extends Usuario{
     private List<Imovel> imoveisInteresses;
 
     /**
+     * Construtor default para usuarios do tipo Cliente
+     */
+    public Cliente(){
+        super();
+    }
+
+    /**
      * Construtor padrao da classe Cliente
      * @param id identificador unico do cliente
      * @param nome nome do cliente

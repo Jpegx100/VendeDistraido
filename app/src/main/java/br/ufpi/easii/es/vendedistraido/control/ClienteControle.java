@@ -37,7 +37,7 @@ public class ClienteControle {
      * @param cliente objeto do tipo cliente vindo da visao e que sera inserido no banco de dados
      * @param context contexto da view
      * @throws ExcecaoDeErroDeConexao excecao que sera disparada caso exista erro na conexao
-     * @throws ExcecaoDeUsuarioJaExistente excecao que sera desparada caso o cliente passado como parametro ja exista no banco de dados
+     * @throws ExcecaoDeUsuarioJaExistente excecao que sera disparada caso o cliente passado como parametro ja exista no banco de dados
      */
     public static void inserir(Cliente cliente, Context context) throws ExcecaoDeErroDeConexao, ExcecaoDeUsuarioJaExistente{
 

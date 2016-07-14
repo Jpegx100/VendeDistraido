@@ -12,6 +12,12 @@ public class Usuario {
     private String telefone;
 
     /**
+     * Construtor default para classe do tipo Usuario
+     */
+    public Usuario(){
+    }
+
+    /**
      * Contrutor padrao do objeto Usuario
      * @param id = identificador unico do objeto Usuario
      * @param nome = nome do objeto Usuario
