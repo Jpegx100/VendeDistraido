@@ -24,7 +24,7 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
  * Classe responsavel por exibir a tela de cadastro de Imovel.
  */
 public class CadastraImovelActivity extends AppCompatActivity {
-    private EditText edt_titulo, edt_latitude, edt_longitude, edt_endereco;
+    private EditText edt_titulo, edt_endereco;
     private Button btn_cadastrar;
     private Corretor corretor;
     @Override
@@ -32,8 +32,6 @@ public class CadastraImovelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastra_imovel);
         edt_titulo = (EditText)findViewById(R.id.cadastra_imovel_edt_titulo);
-        edt_latitude = (EditText)findViewById(R.id.cadastra_imovel_edt_latitude);
-        edt_longitude = (EditText)findViewById(R.id.cadastra_imovel_edt_longitude);
         edt_endereco = (EditText)findViewById(R.id.cadastra_imovel_edt_endereco);
         btn_cadastrar = (Button)findViewById(R.id.cadastra_imovel_btn_cadastrar);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
@@ -43,19 +41,13 @@ public class CadastraImovelActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String titulo = edt_titulo.getText().toString();
-                String lat = edt_latitude.getText().toString();
-                String lon = edt_longitude.getText().toString();
+                String titulo = edt_titulo.getText().toString();;
                 String end = edt_endereco.getText().toString();
-                Imovel imovel = new Imovel(lat, lon, end, corretor);
-                //try {
-                    //ImovelControle.inserir(imovel, corretor, getContext());
                 Intent intent = new Intent(getContext(),MapsActivity.class);
+                intent.putExtra(Constantes.IMOVEL_TITULO, titulo);
+                intent.putExtra(Constantes.IMOVEL_ENDERECO, end);
                 startActivity(intent);
-                    finish();
-                //} catch (ExcecaoImovelJaExistente excecaoImovelJaExistente) {
-                 //   excecaoImovelJaExistente.printStackTrace();
-                //}
+                finish();
             }
         };
     }

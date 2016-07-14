@@ -1,12 +1,17 @@
 package br.ufpi.easii.es.vendedistraido.view.corretor;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -21,55 +26,75 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import br.ufpi.easii.es.vendedistraido.R;
+import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
+import br.ufpi.easii.es.vendedistraido.exception.ExcecaoImovelJaExistente;
+import br.ufpi.easii.es.vendedistraido.model.Corretor;
+import br.ufpi.easii.es.vendedistraido.model.Imovel;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
 public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         GoogleMap.OnMarkerDragListener,
-        GoogleMap.OnMapLongClickListener,
+        GoogleMap.OnMapClickListener,
         View.OnClickListener {
-
-    //Our Map
     private GoogleMap mMap;
-
-    //To store longitude and latitude from map
     private double longitude;
     private double latitude;
-
-    //Buttons
-    private ImageButton buttonSave;
-    private ImageButton buttonCurrent;
-    private ImageButton buttonView;
-
-    //Google ApiClient
+    private Button buttonSave;
     private GoogleApiClient googleApiClient;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        //Initializing googleapi client
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-
-        //Initializing views and adding onclick listeners
-        buttonSave = (ImageButton) findViewById(R.id.buttonSave);
-        buttonCurrent = (ImageButton) findViewById(R.id.buttonCurrent);
-        buttonView = (ImageButton) findViewById(R.id.buttonView);
+        buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(this);
-        buttonCurrent.setOnClickListener(this);
-        buttonView.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == buttonSave){
+            //getCurrentLocation();
+            //moveMap();
+            Intent intent = getIntent();
+            if(intent.hasExtra(Constantes.IMOVEL_TITULO)) {
+                String titulo = intent.getStringExtra(Constantes.IMOVEL_TITULO);
+                String end = intent.getStringExtra(Constantes.IMOVEL_ENDERECO);
+                Corretor corretor = usuarioLogado();
+                Imovel imovel = new Imovel(latitude+"", longitude+"", end, corretor);
+                try {
+                    Log.i("LATLONG", latitude+"|"+longitude);
+                    ImovelControle.inserir(imovel, corretor, getContext());
+                    finish();
+                } catch (ExcecaoImovelJaExistente excecaoImovelJaExistente) {
+                    excecaoImovelJaExistente.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .draggable(true));
+        latitude = latLng.latitude;
+        longitude = latLng.longitude;
+        Log.i("LATLONG", latitude+"|"+longitude);
     }
 
     @Override
@@ -104,25 +129,14 @@ public class MapsActivity extends FragmentActivity implements
 
     //Function to move the map
     private void moveMap() {
-        //String to display current latitude and longitude
         String msg = latitude + ", "+longitude;
-
-        //Creating a LatLng Object to store Coordinates
         LatLng latLng = new LatLng(latitude, longitude);
-
-        //Adding marker to map
         mMap.addMarker(new MarkerOptions()
                 .position(latLng) //setting position
                 .draggable(true) //Making the marker draggable
                 .title("Current Location")); //Adding a title
-
-        //Moving the camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-        //Animating the camera
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-
-        //Displaying current coordinates in toast
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
@@ -133,7 +147,29 @@ public class MapsActivity extends FragmentActivity implements
         mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.setOnMarkerDragListener(this);
-        mMap.setOnMapLongClickListener(this);
+        mMap.setOnMapClickListener(this);
+    }
+    private Corretor usuarioLogado(){
+        SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
+        if(sharedPreferences == null) return null;
+        Corretor corretor = new Corretor(sharedPreferences.getLong(Constantes.USER_LOGIN_ID,-1),
+                sharedPreferences.getString(Constantes.USER_LOGIN_NOME,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_EMAIL,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_SENHA,"-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_TELEFONE,"-1"),
+                //Pegar LISTA de IMOVEIS
+                new ArrayList<Imovel>());
+        return corretor;
+    }
+
+    @Override
+    public void onMarkerDragEnd(Marker marker) {
+        //Getting the coordinates
+        latitude = marker.getPosition().latitude;
+        longitude = marker.getPosition().longitude;
+
+        //Moving the map
+        moveMap();
     }
 
     @Override
@@ -151,17 +187,7 @@ public class MapsActivity extends FragmentActivity implements
 
     }
 
-    @Override
-    public void onMapLongClick(LatLng latLng) {
-        //Clearing all the markers
-        mMap.clear();
-
-        //Adding a new marker to the current pressed position
-        mMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .draggable(true));
-    }
-
+    private Context getContext(){return this;}
     @Override
     public void onMarkerDragStart(Marker marker) {
 
@@ -170,23 +196,5 @@ public class MapsActivity extends FragmentActivity implements
     @Override
     public void onMarkerDrag(Marker marker) {
 
-    }
-
-    @Override
-    public void onMarkerDragEnd(Marker marker) {
-        //Getting the coordinates
-        latitude = marker.getPosition().latitude;
-        longitude = marker.getPosition().longitude;
-
-        //Moving the map
-        moveMap();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v == buttonCurrent){
-            getCurrentLocation();
-            moveMap();
-        }
     }
 }

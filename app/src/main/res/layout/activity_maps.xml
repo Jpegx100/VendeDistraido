@@ -19,22 +19,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#cc3b60a7"
             android:orientation="horizontal">
-            <ImageButton
-                android:id="@+id/buttonCurrent"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="15dp" />
-            <ImageButton
+            <Button
                 android:id="@+id/buttonSave"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="15dp" />
-            <ImageButton
-                android:id="@+id/buttonView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                style="@style/DefaltButton"
+                android:text="@string/cadastrar_imovel"
+                android:background="#e0e0e0"
                 android:layout_margin="15dp" />
         </LinearLayout>
     </LinearLayout>

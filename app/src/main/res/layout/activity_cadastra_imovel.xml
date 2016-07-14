@@ -21,14 +21,6 @@
             android:hint="@string/titulo"/>
         <EditText
             style="@style/DefaltEditText"
-            android:id="@+id/cadastra_imovel_edt_latitude"
-            android:hint="@string/latitude"/>
-        <EditText
-            style="@style/DefaltEditText"
-            android:id="@+id/cadastra_imovel_edt_longitude"
-            android:hint="@string/longitude"/>
-        <EditText
-            style="@style/DefaltEditText"
             android:id="@+id/cadastra_imovel_edt_endereco"
             android:hint="@string/endereco"/>
         <Button
