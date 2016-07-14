@@ -1,5 +1,7 @@
 package br.ufpi.easii.es.vendedistraido.model;
 
+import br.ufpi.easii.es.vendedistraido.util.Tipo;
+
 /**
  * Classe que modela o objeto Imovel
  * Created by Alexandre on 30/06/2016.
@@ -9,7 +11,16 @@ public class Imovel {
     private String latitude;
     private String longitude;
     private String endereco;
+    private String descricao;
     private Corretor corretor;
+    private Double valor;
+    private Tipo tipo;
+
+    /**
+     * Construtor default para objetos do tipo imóvel
+     */
+    public Imovel(){
+    }
 
     /**
      * Contrutor padrao da classe Imovel
@@ -19,16 +30,19 @@ public class Imovel {
      * @param endereco = endereco do objeto Imovel
      * @param corretor = objeto corretor que possui tal imovel cadastrado
      */
-    public Imovel(long id, String latitude, String longitude, String endereco, Corretor corretor) {
+    public Imovel(long id, String latitude, String longitude, String endereco, Corretor corretor, String descricao, Double valor, Tipo tipo) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
         this.endereco = endereco;
         this.corretor = corretor;
+        this.descricao = descricao;
+        this.valor = valor;
+        this.tipo = tipo;
     }
 
     /**
-     * Contrutor alternatico da classe Imovel
+     * Contrutor alternativo da classe Imovel
      * @param latitude = latitude do objeto Imovel
      * @param longitude = longitude do objeto Imovel
      * @param endereco = endereco do objeto Imovel
