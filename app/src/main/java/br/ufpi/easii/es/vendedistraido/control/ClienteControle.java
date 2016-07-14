@@ -13,7 +13,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.loopj.android.http.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +21,6 @@ import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.

@@ -6,14 +6,12 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.google.gson.Gson;
-import com.loopj.android.http.TextHttpResponseHandler;
 
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Gestor;
 import br.ufpi.easii.es.vendedistraido.model.Usuario;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by jpegx on 7/2/2016.

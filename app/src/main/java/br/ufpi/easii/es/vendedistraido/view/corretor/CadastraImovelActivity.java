@@ -47,13 +47,15 @@ public class CadastraImovelActivity extends AppCompatActivity {
                 String lat = edt_latitude.getText().toString();
                 String lon = edt_longitude.getText().toString();
                 String end = edt_endereco.getText().toString();
-                Imovel imovel = new Imovel(-1, lat, lon, end, corretor);
-                try {
-                    ImovelControle.inserir(imovel, corretor, getContext());
+                Imovel imovel = new Imovel(lat, lon, end, corretor);
+                //try {
+                    //ImovelControle.inserir(imovel, corretor, getContext());
+                Intent intent = new Intent(getContext(),MapsActivity.class);
+                startActivity(intent);
                     finish();
-                } catch (ExcecaoImovelJaExistente excecaoImovelJaExistente) {
-                    excecaoImovelJaExistente.printStackTrace();
-                }
+                //} catch (ExcecaoImovelJaExistente excecaoImovelJaExistente) {
+                 //   excecaoImovelJaExistente.printStackTrace();
+                //}
             }
         };
     }
