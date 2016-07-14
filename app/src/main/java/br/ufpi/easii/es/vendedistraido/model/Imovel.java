@@ -17,7 +17,7 @@ public class Imovel {
     private Tipo tipo;
 
     /**
-     * Construtor default para objetos do tipo imóvel
+     * Construtor default para objetos do tipo Imovel
      */
     public Imovel(){
     }
