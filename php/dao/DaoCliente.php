@@ -31,3 +31,38 @@ function adicionarCliente($objetoUsuario) {
         echo 'NAO INSERIDO ' . mysql_error();
     }
 }
+
+function listarClientesPorImovel($idImovel){
+    
+    $query = mysql_query("SELECT id_cliente FROM cliente_interesse_imovel where id_imovel = '$idImovel'");
+  
+    $ids = '(';
+
+    while ($row = mysql_fetch_array($query)) {
+        if ($ids != '(')
+            $ids = $ids . ',';
+        $ids = $ids . $row['id_cliente'];
+    }
+
+    $ids = $ids . ')';
+    //echo $ids;
+    $query2 = mysql_query("SELECT * FROM usuario where id in $ids ");
+
+    $clientes = array();
+    while ($row = mysql_fetch_array($query2)) {
+        $array = array(
+            "id" => $row["id"],
+            "email" => $row["email"],
+            "nome" => $row["nome"],
+            "senha" => $row["senha"],
+            "telefone" => $row["telefone"]
+        );
+        $clientes[] = $array;
+    }
+
+     $string = json_encode($clientes);
+
+    echo $string;
+    
+    
+}
