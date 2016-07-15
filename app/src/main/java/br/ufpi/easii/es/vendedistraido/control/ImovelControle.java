@@ -39,7 +39,7 @@ public class ImovelControle {
     private static final String SEND_URL_PESQUISAR_TODOS = Constantes.SERVER_URL+"ListarImoveis.php";
     private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"PesquisaImovel.php";
     private static final String SEND_URL_INTERESSE = Constantes.SERVER_URL+"InteresseImovel.php";
-
+    private static final String SEND_URL_REMOVER_INTERESSE = Constantes.SERVER_URL+"RemoverInteresseImovel.php";
 
     /**
      * Metodo responsavel por fazer requisicao ao servidor para que possa adicionar um novo imovel, representa o fluxo de insercao de imovel
@@ -91,6 +91,43 @@ public class ImovelControle {
         final String jsonImovel = gson.toJson(imovel.getId());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INTERESSE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("LOG", "response: " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idImovel", jsonImovel);
+                params.put("idCliente", jsonCliente);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    /**
+     * Metodo que remove uma relacao de interesse entre um cliente e um imovel
+     * @param cliente Cliente que esta interessado no imovel passado como parametro
+     * @param imovel Imovel de interesse do cliente passado por parametro
+     * @param context
+     */
+    public static void removerInteresse(Cliente cliente, Imovel imovel, Context context){
+        final Gson gson = new Gson();
+        final String jsonCliente = gson.toJson(cliente.getId());
+        final String jsonImovel = gson.toJson(imovel.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_REMOVER_INTERESSE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
