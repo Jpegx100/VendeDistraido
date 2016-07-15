@@ -16,6 +16,7 @@ import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeImovelInexistente;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoImovelJaExistente;
+import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
@@ -34,8 +35,11 @@ public class ImovelControle {
     private static final String SEND_URL_REMOVER = Constantes.SERVER_URL+"RemoveImovel.php";
     private static final String SEND_URL_EDITAR = Constantes.SERVER_URL+"EditaImovel.php";
     private static final String SEND_URL_PESQUISAR_POR_CORRETOR = Constantes.SERVER_URL+"ListarImoveisPorCorretor.php";
+    private static final String SEND_URL_PESQUISAR_POR_CLIENTE = Constantes.SERVER_URL+"ListarImoveisPorCliente.php";
     private static final String SEND_URL_PESQUISAR_TODOS = Constantes.SERVER_URL+"ListarImoveis.php";
     private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"PesquisaImovel.php";
+    private static final String SEND_URL_INTERESSE = Constantes.SERVER_URL+"InteresseImovel.php";
+
 
     /**
      * Metodo responsavel por fazer requisicao ao servidor para que possa adicionar um novo imovel, representa o fluxo de insercao de imovel
@@ -67,6 +71,43 @@ public class ImovelControle {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoImovel", jsonImovel);
                 params.put("idCorretor", jsonCorretor);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    /**
+     * Metodo que cria uma relacao de interesse entre um cliente e um imovel
+     * @param cliente Cliente que esta interessado no imovel passado como parametro
+     * @param imovel Imovel de interesse do cliente passado por parametro
+     * @param context
+     */
+    public static void interesse(Cliente cliente, Imovel imovel, Context context){
+        final Gson gson = new Gson();
+        final String jsonCliente = gson.toJson(cliente.getId());
+        final String jsonImovel = gson.toJson(imovel.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INTERESSE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("LOG", "response: " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idImovel", jsonImovel);
+                params.put("idCliente", jsonCliente);
 
                 return params;
             }
@@ -210,6 +251,32 @@ public class ImovelControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("idCorretor", jsonCorretor);
+
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    /**
+     * Metodo que pesquisa todos os imoveis que sao de interesse de um determinado cliente
+     * @param cliente Cliente passado como parametro para que seja retornada sua lista de imoveis
+     * @param context
+     * @param mainInterface
+     */
+    public static void pesquisar(Cliente cliente, Context context, MainInterface mainInterface){
+        final Gson gson = new Gson();
+        final String jsonCliente = gson.toJson(cliente.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR_POR_CLIENTE,
+                new RespostaSucessoListaImovel(context, mainInterface),
+                new RespostaErroPesquisa(context, mainInterface)) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idCliente", jsonCliente);
 
                 return params;
             }
