@@ -12,6 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <Button
+            style="@style/DefaltButton"
+            android:id="@+id/cliente_btn_mapa"
+            android:text="@string/mapa"/>
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
