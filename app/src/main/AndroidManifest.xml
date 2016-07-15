@@ -39,7 +39,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".view.corretor.ImovelActivity"></activity>
+        <activity android:name=".view.corretor.ImovelActivity" />
+        <activity android:name=".view.cliente.ImovelClienteActivity"></activity>
     </application>
 
 </manifest>

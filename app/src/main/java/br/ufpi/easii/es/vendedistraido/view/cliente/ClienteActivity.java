@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -80,7 +81,7 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
      */
     @Override
     public void dadosLidos(Object dados) {
-        ArrayList<Imovel> imoveis = new ArrayList<Imovel>();
+        final ArrayList<Imovel> imoveis = new ArrayList<Imovel>();
         if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
             if(((ArrayList) dados).get(0) instanceof Imovel){
                 for(Imovel i:(ArrayList<Imovel>)dados){
@@ -89,6 +90,18 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
 
                 AdapterListView adapter = new AdapterListView(this, R.layout.item_lista, imoveis);
                 listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getContext(), ImovelClienteActivity.class);
+                        intent.putExtra(Constantes.IMOVEL_ENDERECO, imoveis.get(position).getEndereco());
+                        intent.putExtra(Constantes.IMOVEL_VALOR, imoveis.get(position).getValor());
+                        intent.putExtra(Constantes.IMOVEL_ID, imoveis.get(position).getId());
+                        startActivity(intent);
+                    }
+                });
+
             }
         }
     }

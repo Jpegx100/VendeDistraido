@@ -14,4 +14,6 @@ public class Constantes {
     public static String SERVER_URL = "http://10.13.44.51/VendeDistraido/main/";
     public static String IMOVEL_TITULO = "imovel_titulo";
     public static String IMOVEL_ENDERECO = "imovel_end";
+    public static String IMOVEL_VALOR = "imovel_valor";
+    public static String IMOVEL_ID = "imovel_id";
 }
