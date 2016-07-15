@@ -24,4 +24,20 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="preco">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="endereco">
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="desc">
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="TwoWayView">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>

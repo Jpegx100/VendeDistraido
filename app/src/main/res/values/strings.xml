@@ -25,4 +25,5 @@
     <string name="cancela">Cancelar</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_mapa_cliente">Map</string>
+    <string name="editar">Editar</string>
 </resources>

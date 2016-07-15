@@ -16,6 +16,7 @@
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -27,11 +28,18 @@
         <activity android:name=".view.cliente.ClienteActivity" />
         <activity android:name=".view.gestor.ListarCorretoresActivity" />
         <activity android:name=".view.gestor.ListarImoveisActivity" />
-        <activity android:name=".view.corretor.MapsActivity" android:label="@string/title_activity_maps" />
-        <activity android:name=".view.cliente.MapaClienteActivity" android:label="@string/title_activity_mapa_cliente"></activity>
+        <activity
+            android:name=".view.corretor.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".view.cliente.MapaClienteActivity"
+            android:label="@string/title_activity_mapa_cliente" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+        <activity android:name=".view.corretor.ImovelActivity"></activity>
     </application>
 
 </manifest>
