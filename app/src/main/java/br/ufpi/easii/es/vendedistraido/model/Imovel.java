@@ -7,6 +7,7 @@ import br.ufpi.easii.es.vendedistraido.util.Tipo;
  * Created by Alexandre on 30/06/2016.
  */
 public class Imovel {
+
     private long id;
     private String latitude;
     private String longitude;
@@ -133,5 +134,13 @@ public class Imovel {
      */
     public void setCorretor(Corretor corretor) {
         this.corretor = corretor;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
 }

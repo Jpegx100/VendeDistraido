@@ -80,13 +80,14 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
      */
     @Override
     public void dadosLidos(Object dados) {
-        ArrayList<String> imoveis = new ArrayList<String>();
+        ArrayList<Imovel> imoveis = new ArrayList<Imovel>();
         if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
             if(((ArrayList) dados).get(0) instanceof Imovel){
                 for(Imovel i:(ArrayList<Imovel>)dados){
-                    imoveis.add(i.getEndereco());
+                    imoveis.add(i);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, imoveis);
+
+                AdapterListView adapter = new AdapterListView(this, R.layout.item_lista, imoveis);
                 listView.setAdapter(adapter);
             }
         }
