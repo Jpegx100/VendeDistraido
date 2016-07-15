@@ -15,12 +15,15 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeErroDeConexao;
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeUsuarioJaExistente;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
+import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
+import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
  * Created by Irvayne Matheus on 30/06/2016.
@@ -29,6 +32,7 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
 public class ClienteControle {
 
     private static final String SEND_URL = Constantes.SERVER_URL+"AdicionaCliente.php";
+    private static final String  SEND_URL_LISTAR_CLIENTES_POR_IMOVEL = Constantes.SERVER_URL+"ListarClientesPorImovel.php";
 
     /**
      * Metodo responsavel pela insercao de um novo usuario do tipo cliente
@@ -66,5 +70,32 @@ public class ClienteControle {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+    }
+
+    /**
+     * Retorna todos os Clientes interessados no Imovel
+     * @param imovel - objeto imovel
+     * @param context
+     * @param mainInterface
+     */
+    public static void pesquisar(Imovel imovel, Context context, MainInterface mainInterface){
+        final Gson gson = new Gson();
+        final String jsonImovel = gson.toJson(imovel.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_LISTAR_CLIENTES_POR_IMOVEL,
+                new RespostaSucessoListarCliente(context, mainInterface),
+                new RespostaErroPesquisa(context, mainInterface)) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idImovel", jsonImovel);
+
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+
     }
 }
