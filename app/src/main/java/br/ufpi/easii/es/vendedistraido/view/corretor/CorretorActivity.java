@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -19,6 +20,8 @@ import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
+import br.ufpi.easii.es.vendedistraido.view.cliente.AdapterListView;
+import br.ufpi.easii.es.vendedistraido.view.cliente.ImovelClienteActivity;
 
 /**
  * Created by Jpegx.
@@ -86,14 +89,25 @@ public class CorretorActivity extends AppCompatActivity implements MainInterface
      */
     @Override
     public void dadosLidos(Object dados) {
-        ArrayList<String> imoveis = new ArrayList<String>();
+        final ArrayList<Imovel> imoveis = new ArrayList<Imovel>();
         if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
             if(((ArrayList) dados).get(0) instanceof Imovel){
                 for(Imovel i:(ArrayList<Imovel>)dados){
-                    imoveis.add(i.getEndereco());
+                    imoveis.add(i);
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, imoveis);
+                AdapterListView adapter = new AdapterListView(this, R.layout.item_lista, imoveis);
                 lista_imoveis.setAdapter(adapter);
+
+                lista_imoveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(getContext(), ImovelCorretorActivity.class);
+                        intent.putExtra(Constantes.IMOVEL_ENDERECO, imoveis.get(position).getEndereco());
+                        intent.putExtra(Constantes.IMOVEL_VALOR, imoveis.get(position).getValor());
+                        intent.putExtra(Constantes.IMOVEL_ID, imoveis.get(position).getId());
+                        startActivity(intent);
+                    }
+                });
             }
         }
     }

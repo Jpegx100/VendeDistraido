@@ -26,14 +26,14 @@
     </style>
 
     <style name="preco">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">30sp</item>
     </style>
 
     <style name="endereco">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="desc">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">35sp</item>
     </style>
     <style name="TwoWayView">
         <item name="android:orientation">horizontal</item>

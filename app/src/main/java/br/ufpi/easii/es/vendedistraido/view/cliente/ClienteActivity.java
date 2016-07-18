@@ -101,7 +101,6 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
                         startActivity(intent);
                     }
                 });
-
             }
         }
     }

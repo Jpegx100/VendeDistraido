@@ -40,7 +40,8 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".view.corretor.ImovelActivity" />
-        <activity android:name=".view.cliente.ImovelClienteActivity"></activity>
+        <activity android:name=".view.cliente.ImovelClienteActivity" />
+        <activity android:name=".view.corretor.ImovelCorretorActivity"></activity>
     </application>
 
 </manifest>

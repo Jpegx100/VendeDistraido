@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="br.ufpi.easii.es.vendedistraido.view.corretor.ImovelCorretorActivity">
+    <ImageView
+        android:layout_width="@dimen/img_principal_imovel"
+        android:layout_height="@dimen/img_principal_imovel"
+        android:id="@+id/imovel_corretor_img_principal"
+        android:src="@mipmap/casa"/>
+    <TextView
+        style="@style/preco"
+        android:id="@+id/imovel_corretor_txt_preco"/>
+    <TextView
+        style="@style/preco"
+        android:id="@+id/imovel_corretor_txt_endereco"/>
+    <Button
+        style="@style/DefaltButton"
+        android:id="@+id/imovel_corretor_btn_editar"
+        android:text="@string/editarImovel"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imovel_corretor_lst_clientes"/>
+</LinearLayout>
