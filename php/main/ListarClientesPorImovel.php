@@ -9,7 +9,7 @@
 require_once('../dao/ConfiguracaoDoServidor.php');
 require_once('../dao/DaoCliente.php');
 
-$idImovel = $_POST['$idImovel'];
+$idImovel = $_POST['idImovel'];
 //$idImovel = "1";
 
 listarClientesPorImovel($idImovel);

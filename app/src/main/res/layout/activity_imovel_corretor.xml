@@ -15,9 +15,13 @@
         android:id="@+id/imovel_corretor_img_principal"
         android:src="@mipmap/casa"/>
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/preco"
         android:id="@+id/imovel_corretor_txt_preco"/>
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         style="@style/preco"
         android:id="@+id/imovel_corretor_txt_endereco"/>
     <Button

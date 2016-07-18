@@ -23,11 +23,20 @@ public class RespostaSucessoListaImovel implements Response.Listener<String> {
     private MainInterface mainInterface;
     private Context context;
 
+    /**
+     * Contrutor padra da classe
+     * @param context contexto da aplicacao
+     * @param mainInterface Interface que trata a resposta
+     */
     public RespostaSucessoListaImovel(Context context, MainInterface mainInterface) {
         this.mainInterface = mainInterface;
         this.context = context;
     }
 
+    /**
+     * Metodo que faz o tratamento da resposta do servidor
+     * @param response
+     */
     @Override
     public void onResponse(String response) {
         Log.i("LOG", "response: " + response);

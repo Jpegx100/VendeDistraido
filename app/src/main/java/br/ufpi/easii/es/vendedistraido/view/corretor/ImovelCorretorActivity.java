@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,17 +46,20 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
         edt_end.setText(end);
         Imovel imovel = new Imovel();
         imovel.setId(id);
+        Log.i("ID_IMOVEL", id+"");
         ClienteControle.pesquisar(imovel, getContext(), ImovelCorretorActivity.this);
     }
 
     @Override
     public void dadosLidos(Object dados) {
+        Log.i("Dados_LIDOS","OK");
         final ArrayList<String> clientes = new ArrayList<>();
         if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
             if(((ArrayList) dados).get(0) instanceof Cliente){
                 for(Cliente i:(ArrayList<Cliente>)dados){
                     clientes.add(i.getNome());
                 }
+                Log.i("Dados_LIDOS", clientes.get(0));
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clientes);
                 list_clientes.setAdapter(adapter);
             }

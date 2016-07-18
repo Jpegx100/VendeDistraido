@@ -14,6 +14,7 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 
 /**
+ * Classe do adaptador da lista de imoveis, responsavel por inflar e tratar os eventos associados a lista de imoveis.
  * Created by Otávio Cury on 15/07/2016.
  */
 public class AdapterListView extends ArrayAdapter<Imovel> {
@@ -26,8 +27,13 @@ public class AdapterListView extends ArrayAdapter<Imovel> {
         super(context, resource, imoveis);
     }
 
-
-
+    /**
+     * Metodo padrao utilizado para inflar cada item da lista
+     * @param position posicao do item na lista
+     * @param convertView elemento da view
+     * @param parent pai do elemento da view
+     * @return view inflada
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;

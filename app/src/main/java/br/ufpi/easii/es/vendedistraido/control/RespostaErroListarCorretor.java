@@ -9,6 +9,7 @@ import com.android.volley.VolleyError;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
+ * Classe para tratar erro na listagem de Corretores
  * Created by Irvayne Matheus on 04/07/2016.
  */
 public class RespostaErroListarCorretor implements Response.ErrorListener {

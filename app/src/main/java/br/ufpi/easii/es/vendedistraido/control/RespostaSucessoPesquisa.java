@@ -26,6 +26,11 @@ public class RespostaSucessoPesquisa implements Response.Listener<String>{
         this.mainInterface = mainInterface;
         this.context = context;
     }
+
+    /**
+     * Metodo de resposta com sucesso do servidor
+     * @param response resposta do servidor
+     */
     @Override
     public void onResponse(String response) {
         Log.i("LOG", "response: " + response);

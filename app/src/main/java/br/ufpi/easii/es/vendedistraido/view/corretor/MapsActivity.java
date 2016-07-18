@@ -35,6 +35,9 @@ import br.ufpi.easii.es.vendedistraido.model.Corretor;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
+/**
+ * Tela que mostra o mapa na visao do corretor e implementa as funcionalidades de cadastro de imovel
+ */
 public class MapsActivity extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,

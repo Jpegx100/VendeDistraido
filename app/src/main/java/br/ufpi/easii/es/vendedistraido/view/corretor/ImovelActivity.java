@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import br.ufpi.easii.es.vendedistraido.R;
 
+/**
+ * Tela de exibicao do Imovel
+ */
 public class ImovelActivity extends AppCompatActivity {
 
     @Override

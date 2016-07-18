@@ -16,6 +16,9 @@ import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
 
+/**
+ * Tela que mostra o Imovel no perfil do cliente
+ */
 public class ImovelClienteActivity extends AppCompatActivity {
 
     Long id;
