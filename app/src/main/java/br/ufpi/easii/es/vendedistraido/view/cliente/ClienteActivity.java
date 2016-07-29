@@ -44,9 +44,6 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
         btn_mapa = (Button)findViewById(R.id.cliente_btn_mapa);
         btn_mapa.setOnClickListener(mapaClick());
 
-        //btn_mapa = (Button)findViewById(R.id.cliente_btn_mapa);
-        //btn_mapa.setOnClickListener(mapaClick());
-
         cliente = usuarioLogado();
         listView = (ListView)findViewById(R.id.cliente_list_imoveis);
         ImovelControle.pesquisar(this, ClienteActivity.this);

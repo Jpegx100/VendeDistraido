@@ -4,17 +4,18 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="0dp"
+    android:layout_margin="@dimen/activity_vertical_margin"
     tools:context=".view.cliente.ClienteActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            style="@style/btTab"
+            style="@style/SelectTab"
+            android:id="@+id/cliente_btn_lista"
             android:text="@string/lista"/>
         <Button
-            style="@style/btTab"
+            style="@style/NoSelectTab"
             android:id="@+id/cliente_btn_mapa"
             android:text="@string/mapa"/>
     </LinearLayout>

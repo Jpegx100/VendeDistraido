@@ -51,7 +51,7 @@ public class ImovelControle {
      * @param context Contexto da view
      * @throws ExcecaoImovelJaExistente Excecao que sera disparada caso o imovel que esteja sendo inserido ja exista no banco de dados
      */
-    public static void inserir(final Imovel imovel, String imagens, Corretor corretor, Context context) throws ExcecaoImovelJaExistente{
+    public static void inserir(final Imovel imovel, final String imagens, Corretor corretor, Context context) throws ExcecaoImovelJaExistente{
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
         //final String jsonImagens = gson.toJson(imagens);

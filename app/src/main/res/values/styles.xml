@@ -40,20 +40,22 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
     </style>
-
     <style name="btTab">
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@color/colorPrimary</item>
         <item name="android:gravity">center</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
     </style>
-
-    <style name="txtTab">
+    <style name="SelectTab" parent="btTab">
+        <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColor">#ffffff</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="NoSelectTab" parent="btTab">
+        <item name="android:layout_height">52dp</item>
     </style>
 </resources>
 
