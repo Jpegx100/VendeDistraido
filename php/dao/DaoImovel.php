@@ -137,3 +137,24 @@ function RemoverInterresseClienteImovel($idCliente,$idImovel){
     }
     
 }
+
+function adicionarFotos($fotos,$idImovel) {
+    $sqlUpdateFoto = "UPDATE imovel SET foto='$fotos' WHERE id='$idImovel'";
+    
+    $sqlTESTE = mysql_query($sqlUpdateFoto);
+
+    if ($sqlTESTE) {
+        echo'IMAGEM ATUALIZADA COM SUCESSO';
+    } else {
+        echo 'NAO ATUALIZADA';
+    }
+}
+
+function listarFotosDoImovel($objetoImovel) {
+    $idImovel = $objetoImovel->{'id'};
+    $query1 = mysql_query("SELECT foto FROM imovel where id = '$idImovel'");
+    while ($row = mysql_fetch_array($query1)) {
+        $fotos = $row["foto"];
+    }
+    echo $fotos;
+}
