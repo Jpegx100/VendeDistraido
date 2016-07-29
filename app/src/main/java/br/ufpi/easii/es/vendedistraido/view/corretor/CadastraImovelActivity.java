@@ -25,7 +25,7 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
  */
 public class CadastraImovelActivity extends AppCompatActivity {
     private EditText edt_titulo, edt_endereco;
-    private Button btn_cadastrar;
+    private Button btn_cadastrar, btn_carregar_imagens;
     private Corretor corretor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,20 @@ public class CadastraImovelActivity extends AppCompatActivity {
         edt_endereco = (EditText)findViewById(R.id.cadastra_imovel_edt_endereco);
         btn_cadastrar = (Button)findViewById(R.id.cadastra_imovel_btn_cadastrar);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
+        btn_carregar_imagens = (Button)findViewById(R.id.cadastra_imovel_btn_imagens);
+        btn_carregar_imagens.setOnClickListener(onClickCarregar());
         corretor = usuarioLogado();
     }
+
+    private View.OnClickListener onClickCarregar() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        };
+    }
+
     private View.OnClickListener onClickCadastrar(){
         return new View.OnClickListener() {
             @Override

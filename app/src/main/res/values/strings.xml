@@ -27,4 +27,5 @@
     <string name="title_activity_mapa_cliente">Map</string>
     <string name="editar">Editar</string>
     <string name="editarImovel">Editar Imovel</string>
+    <string name="carregar_imagens">Carregar Imagens</string>
 </resources>
