@@ -1,6 +1,8 @@
 package br.ufpi.easii.es.vendedistraido.control;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -11,7 +13,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import junit.runner.Version;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeImovelInexistente;
@@ -40,7 +47,9 @@ public class ImovelControle {
     private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"PesquisaImovel.php";
     private static final String SEND_URL_INTERESSE = Constantes.SERVER_URL+"InteresseImovel.php";
     private static final String SEND_URL_REMOVER_INTERESSE = Constantes.SERVER_URL+"RemoverInteresseImovel.php";
-
+    private static final String SEND_URL_INSERIR_IMAGEM = Constantes.SERVER_URL + "InserirFotoDeImovel.php";
+    private static final String SEND_URL_LISTAR_IMAGEM = Constantes.SERVER_URL + "ListarFotosDoImovel.php";
+    private static final String SEND_URL_EXCLUIR = Constantes.SERVER_URL + "DeletarImovel.php";
     /**
      * Metodo responsavel por fazer requisicao ao servidor para que possa adicionar um novo imovel, representa o fluxo de insercao de imovel
      * @param imovel Imovel vindo da visao e que sera inserido no banco de dados
@@ -335,6 +344,67 @@ public class ImovelControle {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public static void inserirImagem(List<Bitmap> imagens, Imovel imovel, Context context, MainInterface mainInterface){
+        String imagensString = "";
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Gson gson = new Gson();
+        final String jsonImagens;
+        final String idImovel = gson.toJson(imovel.getId());
+
+        for(Bitmap b : imagens){
+            b.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] bt = baos.toByteArray();
+            String temp = Base64.encodeToString(bt, Base64.DEFAULT);
+            imagensString = imagensString + temp + "codesplit";
+        }
+
+        jsonImagens = gson.toJson(imagensString);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR_IMAGEM,
+                new RespostaSucessoListaImovel(context, mainInterface),
+                new RespostaErroPesquisa(context, mainInterface)) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("fotos", jsonImagens);
+                params.put("idImovel", idImovel);
+
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public static void excluir(Imovel imovel, Context context, MainInterface mainInterface){
+        final Gson gson = new Gson();
+        final String jsonImovel = gson.toJson(imovel);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("LOG", "response: " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("objetoImovel", jsonImovel);
 
                 return params;
             }
