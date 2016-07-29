@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
@@ -31,7 +31,7 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
     public static final String ID_CLIENTE = "id_cliente";
     private Cliente cliente;
     private ListView listView;
-    private Button btn_mapa;
+    private Button btn_mapa, btn_lista;
     /**
      * Metodo padrao
      * @param savedInstanceState
@@ -43,6 +43,10 @@ public class ClienteActivity extends AppCompatActivity implements MainInterface 
         Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
         btn_mapa = (Button)findViewById(R.id.cliente_btn_mapa);
         btn_mapa.setOnClickListener(mapaClick());
+
+        //btn_mapa = (Button)findViewById(R.id.cliente_btn_mapa);
+        //btn_mapa.setOnClickListener(mapaClick());
+
         cliente = usuarioLogado();
         listView = (ListView)findViewById(R.id.cliente_list_imoveis);
         ImovelControle.pesquisar(this, ClienteActivity.this);
