@@ -33,7 +33,7 @@ public class CorretorControle {
     private static final String SEND_URL_INSERIR = Constantes.SERVER_URL+"AdicionaCorretor.php";
     private static final String SEND_URL_LISTAR = Constantes.SERVER_URL+"ListarCorretor.php";
     private static final String SEND_URL_PESQUISAR = Constantes.SERVER_URL+"ListarCorretores.php";
-
+    private static final String SEND_URL_EXCLUIR = Constantes.SERVER_URL+"ExcluirCorretor.php";
     /**
      * Metodo responsavel pela insercao de um novo usuario do tipo corretor
      * @param corretor objeto do tipo corretor vindo da visao e que sera inserido no banco de dados
@@ -78,7 +78,7 @@ public class CorretorControle {
      * @param context contexto da view
      * @return retorna uma lista com todos os corretores encontrados para tais entradas
      */
-    public void pesquisar(Gestor gestor, Context context, MainInterface mainInterface){
+    public static void pesquisar(Gestor gestor, Context context, MainInterface mainInterface){
         final Gson gson = new Gson();
         final String jsonGestor = gson.toJson(gestor);
 
@@ -90,6 +90,35 @@ public class CorretorControle {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoGestor", jsonGestor);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public static void excluir(Corretor corretor, Context context, MainInterface mainInterface){
+        final Gson gson = new Gson();
+        final String jsonCorretor = gson.toJson(corretor.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_EXCLUIR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("LOG", "response: " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Toast.makeText(ClienteControle.this, "Verifique sua conexo!", Toast.LENGTH_LONG).show();
+                        Log.i("LOG", "erro: " + error.getMessage().toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idCorretor", jsonCorretor);
                 return params;
             }
         };
