@@ -76,11 +76,13 @@ public class MapsActivity extends FragmentActivity implements
             if(intent.hasExtra(Constantes.IMOVEL_TITULO)) {
                 String titulo = intent.getStringExtra(Constantes.IMOVEL_TITULO);
                 String end = intent.getStringExtra(Constantes.IMOVEL_ENDERECO);
+                String foto =  intent.getStringExtra("foto");
                 Corretor corretor = usuarioLogado();
                 Imovel imovel = new Imovel(latitude+"", longitude+"", end, corretor);
                 try {
                     Log.i("LATLONG", latitude+"|"+longitude);
-                    ImovelControle.inserir(imovel, corretor, getContext());
+                    ImovelControle.inserir(imovel, foto, corretor, getContext());
+                   // ImovelControle.inserirImagem(foto,imovel,);
                     finish();
                 } catch (ExcecaoImovelJaExistente excecaoImovelJaExistente) {
                     excecaoImovelJaExistente.printStackTrace();
