@@ -2,14 +2,14 @@
 
 include 'ConfiguracaoDoServidor.php';
 
-function adicionarImovel($objetoImovel, $idCorretor) {
+function adicionarImovel($objetoImovel, $idCorretor,$fotos) {
 
     $endereco = $objetoImovel->{'endereco'};
     $latitude = $objetoImovel->{'latitude'};
     $longitude = $objetoImovel->{'longitude'};
     // $id_corretor = $objetoImovel->{'id_corretor'};
 
-    $sqlInsertImovel = "insert into imovel (endereco,latitude,longitude,id_corretor) values ('$endereco','$latitude','$longitude','$idCorretor')";
+    $sqlInsertImovel = "insert into imovel (endereco,latitude,longitude,id_corretor,foto) values ('$endereco','$latitude','$longitude','$idCorretor','$fotos')";
     $sqlTESTE = mysql_query($sqlInsertImovel);
 
     if ($sqlTESTE) {
