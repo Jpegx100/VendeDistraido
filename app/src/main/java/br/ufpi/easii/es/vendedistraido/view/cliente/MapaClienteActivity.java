@@ -13,7 +13,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
+import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 public class MapaClienteActivity extends FragmentActivity implements
@@ -31,6 +34,7 @@ public class MapaClienteActivity extends FragmentActivity implements
 
     private GoogleMap mMap;
     private Button btn_lista;
+    private ArrayList<Imovel> imoveis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,7 @@ public class MapaClienteActivity extends FragmentActivity implements
                 startActivity(intent);
             }
         });
+        imoveis = new ArrayList<Imovel>();
     }
     private Context getContext(){
         return this;
@@ -80,14 +85,34 @@ public class MapaClienteActivity extends FragmentActivity implements
         if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
             if(((ArrayList) dados).get(0) instanceof Imovel){
                 for(Imovel i:(ArrayList<Imovel>)dados){
+                    imoveis.add(i);
                     LatLng latLng = new LatLng(Double.parseDouble(i.getLatitude()), Double.parseDouble(i.getLongitude()));
                     Log.i("LATLONG",latLng.toString());
-                    mMap.addMarker(new MarkerOptions()
+                    MarkerOptions marker = new MarkerOptions()
                             .position(latLng) //setting position
                             .draggable(false) //Making the marker draggable
-                            .title(i.getEndereco())); //Adding a title
-                    //imoveis.add(i.getEndereco());
+                            .title(i.getEndereco()) //Adding a title
+                            .icon(BitmapDescriptorFactory.fromResource(R.mipmap.token_casa));
+                    mMap.addMarker(marker);
                 }
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        Log.i("Marker_Clicked",marker.getTitle());
+                        for(Imovel i:imoveis){
+                            if(i.getLatitude().equals(String.valueOf(marker.getPosition().latitude))
+                                    && i.getLongitude().equals(String.valueOf(marker.getPosition().longitude))){
+                                Intent intent = new Intent(getContext(), ImovelClienteActivity.class);
+                                intent.putExtra(Constantes.IMOVEL_ENDERECO, i.getEndereco());
+                                intent.putExtra(Constantes.IMOVEL_VALOR, i.getValor());
+                                intent.putExtra(Constantes.IMOVEL_ID, i.getId());
+                                startActivity(intent);
+                                break;
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
         }
     }

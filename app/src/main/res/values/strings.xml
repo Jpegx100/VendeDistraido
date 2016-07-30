@@ -28,4 +28,6 @@
     <string name="editar">Editar</string>
     <string name="editarImovel">Editar Imovel</string>
     <string name="carregar_imagens">Carregar Imagens</string>
+    <string name="preco">Preço</string>
+    <string name="adicionar_localizacao">Adicionar Localização</string>
 </resources>

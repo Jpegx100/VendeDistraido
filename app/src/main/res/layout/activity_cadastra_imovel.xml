@@ -23,13 +23,19 @@
             style="@style/DefaltEditText"
             android:id="@+id/cadastra_imovel_edt_endereco"
             android:hint="@string/endereco"/>
-        <Button
-            style="@style/DefaltButton"
-            android:id="@+id/cadastra_imovel_btn_cadastrar"
-            android:text="@string/cadastrar"/>
+        <EditText
+            style="@style/DefaltEditText"
+            android:inputType="number"
+            android:id="@+id/cadastra_imovel_edt_preco"
+            android:hint="@string/preco"
+            android:layout_marginBottom="20dp"/>
         <Button
             style="@style/DefaltButton"
             android:id="@+id/cadastra_imovel_btn_imagens"
-            android:text="@string/carregar_imagens"/>
+            android:text="@string/carregar_imagens" />
+        <Button
+            style="@style/DefaltButton"
+            android:id="@+id/cadastra_imovel_btn_cadastrar"
+            android:text="@string/adicionar_localizacao"/>
     </LinearLayout>
 </RelativeLayout>

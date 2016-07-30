@@ -9,4 +9,6 @@
 
     <!--cor do botao-->
     <color name="botao">#1a75ff</color>
+    <color name="back">#DFF3FD</color>
+    <color name="default_btn">#304EFD</color>
 </resources>
