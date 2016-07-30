@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +42,8 @@ public class CadastraImovelActivity extends AppCompatActivity {
     private Corretor corretor;
     private static int RESULT_LOAD_IMAGE = 1;
     String fotoString = null;
-
+    Bitmap bmp = null;
+    byte[] byteArray = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,8 @@ public class CadastraImovelActivity extends AppCompatActivity {
         btn_carregar_imagens.setOnClickListener(onClickCarregar());
         corretor = usuarioLogado();
     }
-//daki
+
+   //abre a galeria ou a camera pra selecionar a imagem...
     private View.OnClickListener onClickCarregar() {
         return new View.OnClickListener() {
             @Override
@@ -67,7 +70,7 @@ public class CadastraImovelActivity extends AppCompatActivity {
             }
         };
     }
-
+// trata a foto e salva
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -84,18 +87,19 @@ public class CadastraImovelActivity extends AppCompatActivity {
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            Bitmap bmp = null;
             try {
                 bmp = getBitmapFromUri(selectedImage);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
 
-            fotoString = BitMapToString(bmp);
-            Toast.makeText(this,"Imagem Selecionada",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this,"ERRO",Toast.LENGTH_LONG).show();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byteArray = stream.toByteArray();
+
+            Toast.makeText(this, "Imagem Selecionada", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "ERRO", Toast.LENGTH_LONG).show();
         }
 
 
@@ -109,25 +113,18 @@ public class CadastraImovelActivity extends AppCompatActivity {
         parcelFileDescriptor.close();
         return image;
     }
-    public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
-    }
-//ate aki
+
+
     private View.OnClickListener onClickCadastrar() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String titulo = edt_titulo.getText().toString();
-                ;
                 String end = edt_endereco.getText().toString();
                 Intent intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra(Constantes.IMOVEL_TITULO, titulo);
                 intent.putExtra(Constantes.IMOVEL_ENDERECO, end);
-                intent.putExtra("foto", fotoString);
+                intent.putExtra("foto", byteArray);
                 startActivity(intent);
                 finish();
             }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -69,20 +71,26 @@ public class MapsActivity extends FragmentActivity implements
 
     @Override
     public void onClick(View v) {
-        if(v == buttonSave){
+        if (v == buttonSave) {
             //getCurrentLocation();
             //moveMap();
             Intent intent = getIntent();
-            if(intent.hasExtra(Constantes.IMOVEL_TITULO)) {
+            if (intent.hasExtra(Constantes.IMOVEL_TITULO)) {
+
                 String titulo = intent.getStringExtra(Constantes.IMOVEL_TITULO);
                 String end = intent.getStringExtra(Constantes.IMOVEL_ENDERECO);
-                String foto =  intent.getStringExtra("foto");
+
+                Bundle extras = getIntent().getExtras();
+                byte[] byteArray = extras.getByteArray("foto");
+                Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
                 Corretor corretor = usuarioLogado();
-                Imovel imovel = new Imovel(latitude+"", longitude+"", end, corretor);
+                Imovel imovel = new Imovel(latitude + "", longitude + "", end, corretor);
+
                 try {
-                    Log.i("LATLONG", latitude+"|"+longitude);
-                    ImovelControle.inserir(imovel, foto, corretor, getContext());
-                   // ImovelControle.inserirImagem(foto,imovel,);
+                    Log.i("LATLONG", latitude + "|" + longitude);
+                    ImovelControle.inserir(imovel, bmp, corretor, getContext());
+                    // ImovelControle.inserirImagem(foto,imovel,);
                     finish();
                 } catch (ExcecaoImovelJaExistente excecaoImovelJaExistente) {
                     excecaoImovelJaExistente.printStackTrace();
@@ -99,7 +107,7 @@ public class MapsActivity extends FragmentActivity implements
                 .draggable(true));
         latitude = latLng.latitude;
         longitude = latLng.longitude;
-        Log.i("LATLONG", latitude+"|"+longitude);
+        Log.i("LATLONG", latitude + "|" + longitude);
     }
 
     @Override
@@ -134,7 +142,7 @@ public class MapsActivity extends FragmentActivity implements
 
     //Function to move the map
     private void moveMap() {
-        String msg = latitude + ", "+longitude;
+        String msg = latitude + ", " + longitude;
         LatLng latLng = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions()
                 .position(latLng) //setting position
@@ -154,14 +162,15 @@ public class MapsActivity extends FragmentActivity implements
         mMap.setOnMarkerDragListener(this);
         mMap.setOnMapClickListener(this);
     }
-    private Corretor usuarioLogado(){
+
+    private Corretor usuarioLogado() {
         SharedPreferences sharedPreferences = getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
-        if(sharedPreferences == null) return null;
-        Corretor corretor = new Corretor(sharedPreferences.getLong(Constantes.USER_LOGIN_ID,-1),
-                sharedPreferences.getString(Constantes.USER_LOGIN_NOME,"-1"),
-                sharedPreferences.getString(Constantes.USER_LOGIN_EMAIL,"-1"),
-                sharedPreferences.getString(Constantes.USER_LOGIN_SENHA,"-1"),
-                sharedPreferences.getString(Constantes.USER_LOGIN_TELEFONE,"-1"),
+        if (sharedPreferences == null) return null;
+        Corretor corretor = new Corretor(sharedPreferences.getLong(Constantes.USER_LOGIN_ID, -1),
+                sharedPreferences.getString(Constantes.USER_LOGIN_NOME, "-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_EMAIL, "-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_SENHA, "-1"),
+                sharedPreferences.getString(Constantes.USER_LOGIN_TELEFONE, "-1"),
                 //Pegar LISTA de IMOVEIS
                 new ArrayList<Imovel>());
         return corretor;
@@ -192,7 +201,10 @@ public class MapsActivity extends FragmentActivity implements
 
     }
 
-    private Context getContext(){return this;}
+    private Context getContext() {
+        return this;
+    }
+
     @Override
     public void onMarkerDragStart(Marker marker) {
 

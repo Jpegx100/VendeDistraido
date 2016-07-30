@@ -57,10 +57,10 @@ public class ImovelControle {
      * @param context Contexto da view
      * @throws ExcecaoImovelJaExistente Excecao que sera disparada caso o imovel que esteja sendo inserido ja exista no banco de dados
      */
-    public static void inserir(final Imovel imovel, String imagens, Corretor corretor, Context context) throws ExcecaoImovelJaExistente{
+    public static void inserir(final Imovel imovel, final Bitmap foto, Corretor corretor, Context context) throws ExcecaoImovelJaExistente{
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
-        //final String jsonImagens = gson.toJson(imagens);
+        final String stringImagens = BitMapToString(foto);
         final String jsonCorretor = gson.toJson(corretor.getId());
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_INSERIR,
@@ -81,13 +81,21 @@ public class ImovelControle {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("objetoImovel", jsonImovel);
                 params.put("idCorretor", jsonCorretor);
-                params.put("fotos", imagens);
+                params.put("fotos", stringImagens);
 
                 return params;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
+    }
+
+    public static String BitMapToString(Bitmap bitmap){
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+        return temp;
     }
 
     /**
