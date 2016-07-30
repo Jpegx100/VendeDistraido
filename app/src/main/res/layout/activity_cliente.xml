@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_margin="@dimen/activity_vertical_margin"
     tools:context=".view.cliente.ClienteActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Button
-            style="@style/DefaltButton"
+            style="@style/SelectTab"
+            android:id="@+id/cliente_btn_lista"
+            android:text="@string/lista"/>
+        <Button
+            style="@style/NoSelectTab"
             android:id="@+id/cliente_btn_mapa"
             android:text="@string/mapa"/>
+    </LinearLayout>
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/cliente_list_imoveis">
-
         </ListView>
-    </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

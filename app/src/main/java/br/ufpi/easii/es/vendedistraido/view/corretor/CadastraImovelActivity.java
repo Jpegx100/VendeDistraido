@@ -114,7 +114,6 @@ public class CadastraImovelActivity extends AppCompatActivity {
         return image;
     }
 
-
     private View.OnClickListener onClickCadastrar() {
         return new View.OnClickListener() {
             @Override

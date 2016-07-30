@@ -9,10 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.ClienteControle;
@@ -28,14 +31,22 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
     private ListView list_clientes;
     private TextView edt_preco, edt_end;
 
+    private ExpandableListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private List<String> listNome;
+    private HashMap<String, List<String>> listClientes;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imovel_corretor);
         btn_editar = (Button)findViewById(R.id.imovel_corretor_btn_editar);
-        list_clientes = (ListView)findViewById(R.id.imovel_corretor_lst_clientes);
+        //list_clientes = (ListView)findViewById(R.id.imovel_corretor);
         edt_end = (TextView)findViewById(R.id.imovel_corretor_txt_endereco);
         edt_preco = (TextView)findViewById(R.id.imovel_corretor_txt_preco);
+
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
 
         Bundle args = getIntent().getExtras();
         String end = args.getString(Constantes.IMOVEL_ENDERECO);
@@ -54,14 +65,28 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
     public void dadosLidos(Object dados) {
         Log.i("Dados_LIDOS","OK");
         final ArrayList<String> clientes = new ArrayList<>();
+        listClientes = new HashMap<String, List<String>>();
+
         if((dados instanceof ArrayList) && (((ArrayList) dados).size()>0)){
             if(((ArrayList) dados).get(0) instanceof Cliente){
+
                 for(Cliente i:(ArrayList<Cliente>)dados){
+
+                    ArrayList<String> dadosUsuario = new ArrayList<String>();
                     clientes.add(i.getNome());
+                    dadosUsuario.add(i.getEmail());
+                    dadosUsuario.add(i.getTelefone());
+                    listClientes.put(i.getNome(), dadosUsuario);
+
                 }
+
                 Log.i("Dados_LIDOS", clientes.get(0));
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clientes);
-                list_clientes.setAdapter(adapter);
+                listAdapter = new ExpandableListAdapter(this, clientes, listClientes);
+                expListView.setAdapter(listAdapter);
+
+//                Log.i("Dados_LIDOS", clientes.get(0));
+//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clientes);
+//                list_clientes.setAdapter(adapter);
             }
         }
     }
@@ -72,4 +97,36 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
     }
 
     public Context getContext() {return this;    }
+
+    public HashMap<String, List<String>> getListClientes() {
+        return listClientes;
+    }
+
+    public void setListClientes(HashMap<String, List<String>> listClientes) {
+        this.listClientes = listClientes;
+    }
+
+    public List<String> getListNome() {
+        return listNome;
+    }
+
+    public void setListNome(List<String> listNome) {
+        this.listNome = listNome;
+    }
+
+    public ExpandableListView getExpListView() {
+        return expListView;
+    }
+
+    public void setExpListView(ExpandableListView expListView) {
+        this.expListView = expListView;
+    }
+
+    public ExpandableListAdapter getListAdapter() {
+        return listAdapter;
+    }
+
+    public void setListAdapter(ExpandableListAdapter listAdapter) {
+        this.listAdapter = listAdapter;
+    }
 }

@@ -1,9 +1,13 @@
 package br.ufpi.easii.es.vendedistraido.view.cliente;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,6 +20,7 @@ import java.util.ArrayList;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
+import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
@@ -25,7 +30,7 @@ public class MapaClienteActivity extends FragmentActivity implements
         MainInterface{
 
     private GoogleMap mMap;
-
+    private Button btn_lista;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +40,18 @@ public class MapaClienteActivity extends FragmentActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         ImovelControle.pesquisar(this, MapaClienteActivity.this);
+
+        btn_lista = (Button)findViewById(R.id.cliente_mapa_btn_lista);
+        btn_lista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ClienteActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    private Context getContext(){
+        return this;
     }
     /**
      * Manipulates the map once available.

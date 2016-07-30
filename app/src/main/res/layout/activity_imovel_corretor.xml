@@ -28,8 +28,9 @@
         style="@style/DefaltButton"
         android:id="@+id/imovel_corretor_btn_editar"
         android:text="@string/editarImovel"/>
-    <ListView
+    <ExpandableListView
+        android:id="@+id/lvExp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imovel_corretor_lst_clientes"/>
+        />
 </LinearLayout>

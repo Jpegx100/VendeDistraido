@@ -41,7 +41,7 @@
 
         <activity android:name=".view.corretor.ImovelActivity" />
         <activity android:name=".view.cliente.ImovelClienteActivity" />
-        <activity android:name=".view.corretor.ImovelCorretorActivity"></activity>
+        <activity android:name=".view.corretor.ImovelCorretorActivity" />
     </application>
 
 </manifest>

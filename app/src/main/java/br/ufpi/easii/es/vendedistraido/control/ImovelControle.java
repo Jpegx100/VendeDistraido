@@ -13,12 +13,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-import junit.runner.Version;
-
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.ufpi.easii.es.vendedistraido.exception.ExcecaoDeImovelInexistente;
@@ -50,6 +46,7 @@ public class ImovelControle {
     private static final String SEND_URL_INSERIR_IMAGEM = Constantes.SERVER_URL + "InserirFotoDeImovel.php";
     private static final String SEND_URL_LISTAR_IMAGEM = Constantes.SERVER_URL + "ListarFotosDoImovel.php";
     private static final String SEND_URL_EXCLUIR = Constantes.SERVER_URL + "DeletarImovel.php";
+    private static final String SEND_URL_PESQUISAR_IMAGENS = Constantes.SERVER_URL+"ListarFotosDoImovel.php";
     /**
      * Metodo responsavel por fazer requisicao ao servidor para que possa adicionar um novo imovel, representa o fluxo de insercao de imovel
      * @param imovel Imovel vindo da visao e que sera inserido no banco de dados
@@ -58,6 +55,7 @@ public class ImovelControle {
      * @throws ExcecaoImovelJaExistente Excecao que sera disparada caso o imovel que esteja sendo inserido ja exista no banco de dados
      */
     public static void inserir(final Imovel imovel, final Bitmap foto, Corretor corretor, Context context) throws ExcecaoImovelJaExistente{
+
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
         final String stringImagens = BitMapToString(foto);
@@ -418,6 +416,26 @@ public class ImovelControle {
 
                 return params;
             }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
+    public static void pesquisarImagens(Imovel imovel, Context context, MainInterface mainInterface){
+        final Gson gson = new Gson();
+        final String jsonImovel = gson.toJson(imovel.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR_IMAGENS,
+                new RespostaSucessoListarImagens(context, mainInterface),
+                new RespostaErroListarImagens(context, mainInterface)) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idImovel", jsonImovel);
+
+                return params;
+            }
+
         };
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
