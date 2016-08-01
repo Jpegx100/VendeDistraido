@@ -97,6 +97,12 @@ public class CorretorControle {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Metodo responsavel por Excluir um Corretor
+     * @param corretor - Objeto Corretor a ser excluido
+     * @param context
+     * @param mainInterface
+     */
     public static void excluir(Corretor corretor, Context context, MainInterface mainInterface){
         final Gson gson = new Gson();
         final String jsonCorretor = gson.toJson(corretor.getId());

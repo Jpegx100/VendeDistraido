@@ -44,7 +44,6 @@ public class ImovelControle {
     private static final String SEND_URL_INTERESSE = Constantes.SERVER_URL+"InteresseImovel.php";
     private static final String SEND_URL_REMOVER_INTERESSE = Constantes.SERVER_URL+"RemoverInteresseImovel.php";
     private static final String SEND_URL_INSERIR_IMAGEM = Constantes.SERVER_URL + "InserirFotoDeImovel.php";
-    private static final String SEND_URL_LISTAR_IMAGEM = Constantes.SERVER_URL + "ListarFotosDoImovel.php";
     private static final String SEND_URL_EXCLUIR = Constantes.SERVER_URL + "DeletarImovel.php";
     private static final String SEND_URL_PESQUISAR_IMAGENS = Constantes.SERVER_URL+"ListarFotosDoImovel.php";
     /**
@@ -392,6 +391,12 @@ public class ImovelControle {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Metodo responsavel por excluir uma Imovel
+     * @param imovel - Objeto Imovel a ser excluido
+     * @param context Contexto da view
+     * @param mainInterface Inteface utilizada para fazer a passagem dos dados recebidos do controle para a view
+     */
     public static void excluir(Imovel imovel, Context context, MainInterface mainInterface){
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel);
@@ -421,6 +426,12 @@ public class ImovelControle {
         requestQueue.add(stringRequest);
     }
 
+    /**
+     * Metodo responsavel por pesquisar todas as fotos de um determinado imovel
+     * @param imovel - Oobjeto imovel a ser buscado imagens
+     * @param context Contexto da view
+     * @param mainInterface Inteface utilizada para fazer a passagem dos dados recebidos do controle para a view
+     */
     public static void pesquisarImagens(Imovel imovel, Context context, MainInterface mainInterface){
         final Gson gson = new Gson();
         final String jsonImovel = gson.toJson(imovel.getId());
