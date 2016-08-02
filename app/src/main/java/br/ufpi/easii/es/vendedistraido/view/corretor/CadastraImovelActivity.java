@@ -37,7 +37,7 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
  * Classe responsavel por exibir a tela de cadastro de Imovel.
  */
 public class CadastraImovelActivity extends AppCompatActivity {
-    private EditText edt_titulo, edt_endereco;
+    private EditText edt_titulo, edt_endereco, edt_valor, edt_descricao;
     private Button btn_cadastrar, btn_carregar_imagens;
     private Corretor corretor;
     private static int RESULT_LOAD_IMAGE = 1;
@@ -48,8 +48,12 @@ public class CadastraImovelActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastra_imovel);
+
         edt_titulo = (EditText) findViewById(R.id.cadastra_imovel_edt_titulo);
         edt_endereco = (EditText) findViewById(R.id.cadastra_imovel_edt_endereco);
+        edt_valor = (EditText)findViewById(R.id.cadastra_imovel_edt_valor);
+        edt_descricao = (EditText)findViewById(R.id.cadastra_imovel_edt_descricao);
+
         btn_cadastrar = (Button) findViewById(R.id.cadastra_imovel_btn_cadastrar);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
         btn_carregar_imagens = (Button) findViewById(R.id.cadastra_imovel_btn_imagens);
@@ -78,7 +82,7 @@ public class CadastraImovelActivity extends AppCompatActivity {
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
+            Log.i("Caminhoa", filePathColumn[0]);
             Cursor cursor = getContentResolver().query(selectedImage,
                     filePathColumn, null, null, null);
             cursor.moveToFirst();
@@ -120,9 +124,14 @@ public class CadastraImovelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String titulo = edt_titulo.getText().toString();
                 String end = edt_endereco.getText().toString();
+                String desc = edt_descricao.getText().toString();
+                String valor = edt_valor.getText().toString();
+
                 Intent intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra(Constantes.IMOVEL_TITULO, titulo);
                 intent.putExtra(Constantes.IMOVEL_ENDERECO, end);
+                intent.putExtra(Constantes.IMOVEL_VALOR, valor);
+                intent.putExtra(Constantes.IMOVEL_DESCRICAO, desc);
                 intent.putExtra("foto", byteArray);
                 startActivity(intent);
                 finish();

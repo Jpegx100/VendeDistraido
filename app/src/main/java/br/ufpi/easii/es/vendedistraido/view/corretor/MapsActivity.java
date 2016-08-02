@@ -79,6 +79,8 @@ public class MapsActivity extends FragmentActivity implements
 
                 String titulo = intent.getStringExtra(Constantes.IMOVEL_TITULO);
                 String end = intent.getStringExtra(Constantes.IMOVEL_ENDERECO);
+                String desc = intent.getStringExtra(Constantes.IMOVEL_DESCRICAO);
+                float valor = Float.parseFloat(intent.getStringExtra(Constantes.IMOVEL_VALOR));
 
                 Bundle extras = getIntent().getExtras();
                 byte[] byteArray = extras.getByteArray("foto");
@@ -86,6 +88,9 @@ public class MapsActivity extends FragmentActivity implements
 
                 Corretor corretor = usuarioLogado();
                 Imovel imovel = new Imovel(latitude + "", longitude + "", end, corretor);
+                imovel.setDescricao(desc);
+                imovel.setTitulo(titulo);
+                imovel.setValor(valor);
 
                 try {
                     Log.i("LATLONG", latitude + "|" + longitude);

@@ -11,10 +11,12 @@ public class Imovel {
     private long id;
     private String latitude;
     private String longitude;
+    private String titulo;
     private String endereco;
     private String descricao;
     private Corretor corretor;
-    private Double valor;
+    private String foto;
+    private Float valor;
     private Tipo tipo;
 
     /**
@@ -31,7 +33,7 @@ public class Imovel {
      * @param endereco = endereco do objeto Imovel
      * @param corretor = objeto corretor que possui tal imovel cadastrado
      */
-    public Imovel(long id, String latitude, String longitude, String endereco, Corretor corretor, String descricao, Double valor, Tipo tipo) {
+    public Imovel(long id, String latitude, String longitude, String endereco, Corretor corretor, String descricao, Float valor, Tipo tipo) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -136,11 +138,35 @@ public class Imovel {
         this.corretor = corretor;
     }
 
-    public Double getValor() {
+    public Float getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(float valor) {
         this.valor = valor;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

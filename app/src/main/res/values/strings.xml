@@ -30,4 +30,6 @@
     <string name="carregar_imagens">Carregar Imagens</string>
     <string name="preco">Preço</string>
     <string name="adicionar_localizacao">Adicionar Localização</string>
+    <string name="valor">Valor</string>
+    <string name="descricao">Descrição</string>
 </resources>
