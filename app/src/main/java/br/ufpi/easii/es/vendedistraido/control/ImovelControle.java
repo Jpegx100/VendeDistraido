@@ -451,4 +451,31 @@ public class ImovelControle {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(stringRequest);
     }
+
+    /**
+     * Metodo que pesquisa um unico imovel
+     * @param imovel Cliente passado como parametro para que seja retornada sua lista de imoveis
+     * @param context
+     * @param mainInterface
+     */
+    public static void pesquisar(Imovel imovel, Context context, MainInterface mainInterface){
+        final Gson gson = new Gson();
+        final String jsonImovel = gson.toJson(imovel.getId());
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SEND_URL_PESQUISAR,
+                new RespostaSucessoPesquisaImovel(context, mainInterface),
+                new RespostaErroPesquisa(context, mainInterface)) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idImovel", jsonImovel);
+
+                return params;
+            }
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        requestQueue.add(stringRequest);
+    }
+
 }
