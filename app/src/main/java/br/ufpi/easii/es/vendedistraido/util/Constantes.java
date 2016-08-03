@@ -19,4 +19,7 @@ public class Constantes {
     public static String IMOVEL_ENDERECO = "imovel_end";
     public static String IMOVEL_VALOR = "imovel_valor";
     public static String IMOVEL_ID = "imovel_id";
+
+    //realiza a verificação da senha para acesso do usuario
+    public static boolean VERIFICA_SENHA = false;
 }

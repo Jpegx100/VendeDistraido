@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.UsuarioControle;
@@ -78,11 +79,12 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
     public void dadosLidos(Object dados) {
         Log.i("USUARIO", dados.getClass().getName());
         if(dados instanceof Usuario) {
-            /*if(((Usuario) dados).getSenha() != edt_senha.getText().toString()){
+
+            if( Constantes.VERIFICA_SENHA && (((Usuario) dados).getSenha() != edt_senha.getText().toString())){
                 edt_senha.setText("");
                 edt_email.setText("");
                 Toast t = Toast.makeText(getContext(), "Senha Incorreta!", Toast.LENGTH_LONG);
-            }else {*/
+            }else {
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences(Constantes.USER, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(Constantes.USER_LOGIN_EMAIL, ((Usuario) dados).getEmail());
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
                     startActivity(intent);
                     Log.i("TYPE", "Gestor");
                 }
-            //}
+            }
         }
     }
     /**
