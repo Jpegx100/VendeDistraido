@@ -22,5 +22,5 @@ public class Constantes {
     public static String IMOVEL_FOTO = "imovel_foto";
 
     //realiza a verifica��o da senha para acesso do usuario
-    public static boolean VERIFICA_SENHA = false;
+    public static boolean VERIFICA_SENHA = true;
 }

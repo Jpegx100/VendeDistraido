@@ -35,7 +35,7 @@ public class ImovelClienteActivity extends AppCompatActivity implements MainInte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imovel_cliente);
-
+        setTitle("Imovel");
         endereco = (TextView) findViewById(R.id.imovel_cliente_txt_endereco);
         preco = (TextView) findViewById(R.id.imovel_cliente_txt_preco);
         gostar = (Button) findViewById(R.id.imovel_cliente_btn_gostar);

@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements MainInterface{
         Log.i("USUARIO", dados.getClass().getName());
         if(dados instanceof Usuario) {
 
-            if( Constantes.VERIFICA_SENHA && (((Usuario) dados).getSenha() != edt_senha.getText().toString())){
+            if( Constantes.VERIFICA_SENHA && !(((Usuario) dados).getSenha().equals(edt_senha.getText().toString()))){
+                Log.i("USUARIO", edt_senha.getText().toString()+"|"+((Usuario) dados).getSenha());
                 edt_senha.setText("");
                 edt_email.setText("");
                 Toast t = Toast.makeText(getContext(), "Senha Incorreta!", Toast.LENGTH_LONG);

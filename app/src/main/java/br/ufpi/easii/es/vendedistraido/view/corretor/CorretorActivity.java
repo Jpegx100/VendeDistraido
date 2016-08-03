@@ -40,7 +40,7 @@ public class CorretorActivity extends AppCompatActivity implements MainInterface
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corretor);
-        Toast.makeText(this, "ClienteActivity", Toast.LENGTH_LONG);
+        setTitle("Imoveis");
         this.corretor = usuarioLogado();
         btn_cadastrar = (Button)findViewById(R.id.corretor_btn_cadastar_imovel);
         btn_cadastrar.setOnClickListener(onClickCadastrar());
@@ -105,7 +105,7 @@ public class CorretorActivity extends AppCompatActivity implements MainInterface
                         intent.putExtra(Constantes.IMOVEL_ENDERECO, imoveis.get(position).getEndereco());
                         intent.putExtra(Constantes.IMOVEL_VALOR, imoveis.get(position).getValor());
                         intent.putExtra(Constantes.IMOVEL_ID, imoveis.get(position).getId());
-                        intent.putExtra(Constantes.IMOVEL_FOTO, imoveis.get(position).getFoto());
+                        //intent.putExtra(Constantes.IMOVEL_FOTO, imoveis.get(position).getFoto());
                         startActivity(intent);
                     }
                 });
