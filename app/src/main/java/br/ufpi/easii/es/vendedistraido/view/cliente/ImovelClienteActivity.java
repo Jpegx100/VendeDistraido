@@ -2,9 +2,12 @@ package br.ufpi.easii.es.vendedistraido.view.cliente;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.BoolRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,32 +25,29 @@ import br.ufpi.easii.es.vendedistraido.view.MainInterface;
  * Tela que mostra o Imovel no perfil do cliente
  */
 public class ImovelClienteActivity extends AppCompatActivity implements MainInterface{
-
+    private Boolean click = false;
     private Long id;
-    private Context context;
     private Imovel imovel;
     private ImageView casa;
+    private Button gostar;
+    private TextView endereco, preco, desc, titulo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imovel_cliente);
 
-        TextView endereco = (TextView) findViewById(R.id.imovel_cliente_txt_endereco);
-        TextView preco = (TextView) findViewById(R.id.imovel_cliente_txt_preco);
-        ImageView gostar = (ImageView) findViewById(R.id.imovel_cliente_img_interesse);
+        endereco = (TextView) findViewById(R.id.imovel_cliente_txt_endereco);
+        preco = (TextView) findViewById(R.id.imovel_cliente_txt_preco);
+        gostar = (Button) findViewById(R.id.imovel_cliente_btn_gostar);
         casa = (ImageView)findViewById(R.id.imovel_cliente_img_principal);
+        desc = (TextView) findViewById(R.id.imovel_cliente_txt_descricao);
+        titulo = (TextView) findViewById(R.id.imovel_cliente_txt_titulo);
 
         gostar.setOnClickListener(onClickInteresse());
 
         Bundle args = getIntent().getExtras();
-
-        context = this;
-        String end = args.getString(Constantes.IMOVEL_ENDERECO);
-        String valor = String.valueOf(args.getFloat(Constantes.IMOVEL_VALOR));
         id = args.getLong(Constantes.IMOVEL_ID);
 
-        endereco.setText(end);
-        preco.setText(valor);
         Imovel i = new Imovel();
         i.setId(id);
         ImovelControle.pesquisar(i, getContext(), ImovelClienteActivity.this);
@@ -55,13 +55,18 @@ public class ImovelClienteActivity extends AppCompatActivity implements MainInte
     private Context getContext(){
         return this;
     }
+
     private View.OnClickListener onClickInteresse() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Imovel imovel = new Imovel();
-                imovel.setId(id);
-                ImovelControle.interesse(usuarioLogado(),imovel,context);
+                gostar.setBackgroundResource(R.color.default_btn_off);
+                gostar.setClickable(false);
+                if(!click) {
+                    Imovel i = new Imovel();
+                    i.setId(id);
+                    ImovelControle.interesse(usuarioLogado(), i, getContext());
+                }
             }
         };
     }
@@ -88,9 +93,12 @@ public class ImovelClienteActivity extends AppCompatActivity implements MainInte
         if(dados instanceof Imovel){
             imovel = (Imovel) dados;
             casa.setImageBitmap(CarregarImagem.StringToBitMap(imovel.getFoto()));
+            titulo.setText(imovel.getTitulo());
+            desc.setText(imovel.getDescricao());
+            endereco.setText(imovel.getEndereco());
+            preco.setText("R$ "+imovel.getValor());
         }
     }
-
     @Override
     public void dadosNaoLidos(Exception e) {
 

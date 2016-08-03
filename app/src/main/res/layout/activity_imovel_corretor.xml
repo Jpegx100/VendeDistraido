@@ -13,24 +13,34 @@
         android:layout_width="@dimen/img_principal_imovel"
         android:layout_height="@dimen/img_principal_imovel"
         android:id="@+id/imovel_corretor_img_principal"
-        android:src="@mipmap/casa"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/preco"
-        android:id="@+id/imovel_corretor_txt_preco"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/preco"
-        android:id="@+id/imovel_corretor_txt_endereco"/>
-    <Button
-        style="@style/DefaltButton"
-        android:id="@+id/imovel_corretor_btn_editar"
-        android:text="@string/editarImovel"/>
+        android:src="@mipmap/logo"
+        android:layout_gravity="center_horizontal"/>
+            <TextView
+                style="@style/preco"
+                android:text="PRECO"
+                android:id="@+id/imovel_corretor_txt_preco"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content" />
+            <TextView
+                android:id="@+id/imovel_corretor_txt_titulo"
+                style="@style/endereco"
+                android:text="Titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/imovel_corretor_txt_endereco"
+                style="@style/endereco"
+                android:text="Endereo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/imovel_corretor_txt_descricao"
+                style="@style/endereco"
+                android:text="Descricao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

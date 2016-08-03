@@ -48,7 +48,6 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imovel_corretor);
-        btn_editar = (Button)findViewById(R.id.imovel_corretor_btn_editar);
         //list_clientes = (ListView)findViewById(R.id.imovel_corretor);
         edt_end = (TextView)findViewById(R.id.imovel_corretor_txt_endereco);
         edt_preco = (TextView)findViewById(R.id.imovel_corretor_txt_preco);

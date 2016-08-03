@@ -9,6 +9,7 @@
         android:id="@+id/imgCasa"
         android:layout_width="@dimen/img_principal_imovel"
         android:layout_height="@dimen/img_principal_imovel"
+        android:src="@mipmap/casa"
         android:layout_gravity="center_horizontal" />
 
     <LinearLayout
@@ -21,27 +22,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="left">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/preco"
-                android:id="@+id/edtPreco" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/endereco"
-                android:id="@+id/edtEndereco" />
-
+                android:text="Titulo"
+                android:id="@+id/edttitulo" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/preco"
+                android:text="Preco"
+                android:id="@+id/edtPreco" />
         </LinearLayout>
-
-        <ImageView
-            android:layout_gravity="right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgGostar"/>
-
-
     </LinearLayout>
 </LinearLayout>

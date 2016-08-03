@@ -52,24 +52,16 @@ public class AdapterListView extends ArrayAdapter<Imovel> {
 
         if(imovel != null){
             ImageView casa = (ImageView) v.findViewById(R.id.imgCasa);
-            TextView endereco = (TextView) v.findViewById(R.id.edtEndereco);
+            TextView titulo = (TextView) v.findViewById(R.id.edttitulo);
             TextView preco = (TextView) v.findViewById(R.id.edtPreco);
-            ImageView gostar = (ImageView) v.findViewById(R.id.imgGostar);
-
             if (casa != null){
                 casa.setImageBitmap(StringToBitMap(imovel.getFoto()));
             }
-
-            if (gostar != null){
-                gostar.setImageResource(R.mipmap.gostar);
+            if(titulo != null){
+                titulo.setText(imovel.getTitulo());
             }
-
-            if(endereco != null){
-                endereco.setText(imovel.getEndereco());
-            }
-
             if(preco != null){
-                preco.setText(String.valueOf(imovel.getValor()));
+                preco.setText("R$ "+String.valueOf(imovel.getValor()));
             }
         }
 
