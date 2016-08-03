@@ -2,14 +2,18 @@ package br.ufpi.easii.es.vendedistraido.view.corretor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,10 +30,13 @@ import br.ufpi.easii.es.vendedistraido.util.Constantes;
 import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 import br.ufpi.easii.es.vendedistraido.view.cliente.AdapterListView;
 
+import static br.ufpi.easii.es.vendedistraido.util.CarregarImagem.StringToBitMap;
+
 public class ImovelCorretorActivity extends AppCompatActivity implements MainInterface{
     private Button btn_editar;
     private ListView list_clientes;
     private TextView edt_preco, edt_end;
+    private ImageView img_casa;
 
     private ExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
@@ -45,21 +52,26 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
         //list_clientes = (ListView)findViewById(R.id.imovel_corretor);
         edt_end = (TextView)findViewById(R.id.imovel_corretor_txt_endereco);
         edt_preco = (TextView)findViewById(R.id.imovel_corretor_txt_preco);
-
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        img_casa = (ImageView) findViewById(R.id.imovel_corretor_img_principal);
 
         Bundle args = getIntent().getExtras();
         String end = args.getString(Constantes.IMOVEL_ENDERECO);
         String valor = String.valueOf(args.getDouble(Constantes.IMOVEL_VALOR));
+        String foto = args.getString(Constantes.IMOVEL_FOTO);
         long id = args.getLong(Constantes.IMOVEL_ID);
 
         edt_preco.setText(valor);
         edt_end.setText(end);
+        img_casa.setImageBitmap(StringToBitMap(foto));
+
         Imovel imovel = new Imovel();
         imovel.setId(id);
         Log.i("ID_IMOVEL", id+"");
         ClienteControle.pesquisar(imovel, getContext(), ImovelCorretorActivity.this);
     }
+
+
 
     @Override
     public void dadosLidos(Object dados) {
@@ -83,10 +95,6 @@ public class ImovelCorretorActivity extends AppCompatActivity implements MainInt
                 Log.i("Dados_LIDOS", clientes.get(0));
                 listAdapter = new ExpandableListAdapter(this, clientes, listClientes);
                 expListView.setAdapter(listAdapter);
-
-//                Log.i("Dados_LIDOS", clientes.get(0));
-//                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clientes);
-//                list_clientes.setAdapter(adapter);
             }
         }
     }

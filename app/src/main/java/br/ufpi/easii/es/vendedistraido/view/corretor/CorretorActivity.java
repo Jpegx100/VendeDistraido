@@ -105,6 +105,7 @@ public class CorretorActivity extends AppCompatActivity implements MainInterface
                         intent.putExtra(Constantes.IMOVEL_ENDERECO, imoveis.get(position).getEndereco());
                         intent.putExtra(Constantes.IMOVEL_VALOR, imoveis.get(position).getValor());
                         intent.putExtra(Constantes.IMOVEL_ID, imoveis.get(position).getId());
+                        intent.putExtra(Constantes.IMOVEL_FOTO, imoveis.get(position).getFoto());
                         startActivity(intent);
                     }
                 });

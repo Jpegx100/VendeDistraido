@@ -14,17 +14,19 @@ import br.ufpi.easii.es.vendedistraido.R;
 import br.ufpi.easii.es.vendedistraido.control.ImovelControle;
 import br.ufpi.easii.es.vendedistraido.model.Cliente;
 import br.ufpi.easii.es.vendedistraido.model.Imovel;
+import br.ufpi.easii.es.vendedistraido.util.CarregarImagem;
 import br.ufpi.easii.es.vendedistraido.util.Constantes;
+import br.ufpi.easii.es.vendedistraido.view.MainInterface;
 
 /**
  * Tela que mostra o Imovel no perfil do cliente
  */
-public class ImovelClienteActivity extends AppCompatActivity {
+public class ImovelClienteActivity extends AppCompatActivity implements MainInterface{
 
-    Long id;
-    Context context;
-
-
+    private Long id;
+    private Context context;
+    private Imovel imovel;
+    private ImageView casa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,7 @@ public class ImovelClienteActivity extends AppCompatActivity {
         TextView endereco = (TextView) findViewById(R.id.imovel_cliente_txt_endereco);
         TextView preco = (TextView) findViewById(R.id.imovel_cliente_txt_preco);
         ImageView gostar = (ImageView) findViewById(R.id.imovel_cliente_img_interesse);
+        casa = (ImageView)findViewById(R.id.imovel_cliente_img_principal);
 
         gostar.setOnClickListener(onClickInteresse());
 
@@ -40,13 +43,18 @@ public class ImovelClienteActivity extends AppCompatActivity {
 
         context = this;
         String end = args.getString(Constantes.IMOVEL_ENDERECO);
-        String valor = String.valueOf(args.getDouble(Constantes.IMOVEL_VALOR));
+        String valor = String.valueOf(args.getFloat(Constantes.IMOVEL_VALOR));
         id = args.getLong(Constantes.IMOVEL_ID);
 
         endereco.setText(end);
         preco.setText(valor);
+        Imovel i = new Imovel();
+        i.setId(id);
+        ImovelControle.pesquisar(i, getContext(), ImovelClienteActivity.this);
     }
-
+    private Context getContext(){
+        return this;
+    }
     private View.OnClickListener onClickInteresse() {
         return new View.OnClickListener() {
             @Override
@@ -73,5 +81,18 @@ public class ImovelClienteActivity extends AppCompatActivity {
                 //Pegar LISTA de IMOVEIS
                 new ArrayList<Imovel>());
         return cliente;
+    }
+
+    @Override
+    public void dadosLidos(Object dados) {
+        if(dados instanceof Imovel){
+            imovel = (Imovel) dados;
+            casa.setImageBitmap(CarregarImagem.StringToBitMap(imovel.getFoto()));
+        }
+    }
+
+    @Override
+    public void dadosNaoLidos(Exception e) {
+
     }
 }

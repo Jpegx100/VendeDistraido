@@ -106,6 +106,7 @@ public class MapaClienteActivity extends FragmentActivity implements
                                 intent.putExtra(Constantes.IMOVEL_ENDERECO, i.getEndereco());
                                 intent.putExtra(Constantes.IMOVEL_VALOR, i.getValor());
                                 intent.putExtra(Constantes.IMOVEL_ID, i.getId());
+                                intent.putExtra(Constantes.IMOVEL_FOTO, i.getFoto());
                                 startActivity(intent);
                                 break;
                             }

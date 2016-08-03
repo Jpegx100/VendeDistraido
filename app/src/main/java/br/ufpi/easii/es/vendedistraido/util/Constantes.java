@@ -5,7 +5,7 @@ package br.ufpi.easii.es.vendedistraido.util;
  * Created by jpegx on 7/4/2016.
  */
 public class Constantes {
-    public static String SERVER_URL = "http://10.28.15.49/VendeDistraido/main/";
+    public static String SERVER_URL = "http://10.13.46.10/VendeDistraido/main/";
 
     public static String USER_LOGIN_ID = "user_login_id";
     public static String USER_LOGIN_NOME = "user_login_nome";
@@ -19,7 +19,8 @@ public class Constantes {
     public static String IMOVEL_ENDERECO = "imovel_end";
     public static String IMOVEL_VALOR = "imovel_valor";
     public static String IMOVEL_ID = "imovel_id";
+    public static String IMOVEL_FOTO = "imovel_foto";
 
-    //realiza a verificação da senha para acesso do usuario
+    //realiza a verificaï¿½ï¿½o da senha para acesso do usuario
     public static boolean VERIFICA_SENHA = false;
 }
